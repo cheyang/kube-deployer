@@ -1,0 +1,29 @@
+---
+VMSpecs:
+  -
+    name: master
+    roles:
+      - master
+      - etcd
+    driver: aliyun
+    instances: 1
+    properties:
+      aliyunecs-image-id: abc
+      aliyunecs-region: cn-hangzhou
+      aliyunecs-instance-type: abc
+      aliyunecs-description: abc
+      
+  -
+    name: slave
+    roles:
+      - slave
+    instances: 2
+    properties:
+      aliyunecs-image-id: abc
+      aliyunecs-region: cn-hangzhou
+      aliyunecs-instance-type: abc
+      aliyunecs-description: abc
+run:
+properties:
+  aliyunecs-access-key-id: abc
+  aliyunecs-access-key-secret: ecd

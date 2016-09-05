@@ -1,0 +1,44 @@
+---
+Vmspec:
+  -
+    Name: kube-master
+    Roles:
+      - master
+      - etcd
+    Instances: 1
+    Properties:
+      softlayerecs-image: DEBIAN_LATEST
+      softlayer-private-vlan-id: cn-hangzhou
+      softlayer-instance-type: abc
+      softlayer-description: abc
+      softlayer-region: dal06
+      softlayer-cpu: 2
+      softlayer-memory: 1024
+      softlayer-hourly-billing: true
+      softlayer-private-net-only: true
+      softlayer-network-max-speed: 1000
+      softlayer-private-net-only: true
+  -
+    Name: kube-slave
+    roles:
+      - slave
+    Instances: 2
+    Properties:
+      softlayer-image-id: DEBIAN_LATEST
+      softlayer-private-vlan-id: cn-hangzhou
+      softlayer-instance-type: abc
+      softlayer-description: abc
+      softlayer-region: dal06
+      softlayer-cpu: 2
+      softlayer-memory: 1024
+      softlayer-hourly-billing: true
+      softlayer-private-net-only: true
+      softlayer-network-max-speed: 1000
+      softlayer-private-net-only: true
+Driver: softlayer
+ClusterType: k8s
+Run:
+Properties:
+  softlayer-api-key: abc
+  softlayer-user: ecd
+  softlayer-api-endpoint: https://api.service.softlayer.com/rest/v3/
