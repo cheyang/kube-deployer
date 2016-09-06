@@ -86,7 +86,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, e
 		NodeSize:       viper.GetString("node-size"),
 		ClusterName:    name,
 		NumNode:        viper.GetInt("num-nodes"),
-		AnsibleVarFile: config.GetClusterInputPath(name),
+		AnsibleVarFile: config.GetClusterInputPath(name, "create"),
 	}, nil
 }
 

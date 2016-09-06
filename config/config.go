@@ -19,7 +19,8 @@ var files = []struct {
 	{"ansible.yaml", templates.AnsibleTemplate},
 }
 
-func GenerateConfigFile(clusterName string, data interface{}) (configFiles []string, err error) {
+// stage can be create/scale
+func GenerateConfigFile(clusterName, stage string, data interface{}) (configFiles []string, err error) {
 	// f, err := os.OpenFile("templates.go", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	// if err != nil {
 	// 	log.Fatal(err)
@@ -31,7 +32,7 @@ func GenerateConfigFile(clusterName string, data interface{}) (configFiles []str
 	// }
 
 	configFiles = []string{}
-	inputDir := filepath.Join(parentDir, clusterName, "input")
+	inputDir := filepath.Join(parentDir, clusterName, "input", stage)
 
 	err = os.MkdirAll(inputDir, 0700)
 	if err != nil {
@@ -39,28 +40,34 @@ func GenerateConfigFile(clusterName string, data interface{}) (configFiles []str
 	}
 
 	for _, file := range files {
-		fileName := filepath.Join(inputDir, file.Filename)
-		_, err = os.Stat(fileName)
+		absPath := filepath.Join(inputDir, file.Filename)
+		_, err = os.Stat(absPath)
 		if os.IsNotExist(err) {
 			err = nil
 		} else {
 			return configFiles, fmt.Errorf(`config file %s is created before, 
 				please check again to make sure you want to overwrite the cluster %s. 
-				If you are sure`, fileName, clusterName)
+				If you are sure`, absPath, clusterName)
 		}
 
-		f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
+		f, err := os.OpenFile(absPath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 		if err != nil {
-			return err
+			return configureFiles, err
 		}
 		tmpl := template.New(file.Filename)
 		tmpl.Delims("[[[", "]]]")
 		tmpl, _ = tmpl.Parse(file.Content)
 		tmpl.Execute(f, data)
-		f.Close()
+		configFiles = append(configFiles, absPath)
+		err = f.Close()
+		if err != nil {
+			return configFiles, err
+		}
 	}
+
+	return configFiles, nil
 }
 
-func GetClusterInputPath(name string) string {
-	return filepath.Join(parentDir, name, "input")
+func GetClusterInputPath(name, stage string) string {
+	return filepath.Join(parentDir, name, "input", stage)
 }
