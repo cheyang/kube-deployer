@@ -1,6 +1,6 @@
-package templates
+package create
 
-var AnsibleCreateTemplate string = `
+var AnsibleTemplate string = `
 # This value determines how kubernetes binaries, config files, and service
 # files are loaded onto the target machines.  The following are the only
 # valid options:

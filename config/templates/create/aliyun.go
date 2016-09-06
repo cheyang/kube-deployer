@@ -1,4 +1,4 @@
-package templates
+package create
 
 var AliyunTemplate string = `
 --- 

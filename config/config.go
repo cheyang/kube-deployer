@@ -21,16 +21,6 @@ var files = []struct {
 
 // stage can be create/scale
 func GenerateConfigFile(clusterName, stage string, data interface{}) (configFiles []string, err error) {
-	// f, err := os.OpenFile("templates.go", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// defer f.Close()
-	// data := Data{tmpls, time.Now().UTC()}
-	// if err := tmpl.Execute(f, data); err != nil {
-	// 	log.Fatal("Failed to render template:", err)
-	// }
-
 	configFiles = []string{}
 	inputDir := filepath.Join(parentDir, clusterName, "input", stage)
 

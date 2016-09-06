@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 
 	"github.com/cheyang/fog/cluster"
 	"github.com/cheyang/fog/types"
 	"github.com/cheyang/fog/util/yaml"
-	"github.com/cheyang/kube-deployer/config"
+	"github.com/cheyang/kube-deployer/helper"
+	"github.com/cheyang/kube-deployer/templates/create"
 	_ "github.com/cheyang/kube-deployer/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -28,11 +30,17 @@ var (
 			}
 			fmt.Printf("args: %+v\n", deployArgs)
 
-			files := config.GenerateConfigFile(deployArgs.ClusterName, deployArgs)
-
+			deployFile, paramFile, err := generateConfigFiles(deployArgs)
+			if err != nil {
+				return err
+			}
+			fmt.Printf("deployFile %s\n", deployFile)
+			fmt.Printf("paramFile %s\n", paramFile)
 			return nil
 		},
 	}
+
+	retry = false
 )
 
 func init() {
@@ -69,25 +77,69 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, e
 	viper.BindPFlag("retry", flags.Lookup("retry"))
 
 	if viper.GetString("key-id") == "" {
-		return nil, errors.New("--key-id are mandatory")
+		return nil, errors.New("--key-id is mandatory")
 	}
 	if viper.GetString("key-secret") == "" {
-		return nil, errors.New("--key-secret are mandatory")
+		return nil, errors.New("--key-secret is mandatory")
 	}
 
 	name := viper.GetString("cluster-name")
+	if name == nil {
+		return nil, errors.New("--cluster-name is mandatory")
+	}
+	retry, err := flags.GetBool("retry")
+	if err != nil {
+		return nil, err
+	}
 
 	return &DeploymentArguments{
-		KeyID:          viper.GetString("key-id"),
-		KeySecret:      viper.GetString("key-secret"),
-		ImageID:        viper.GetString("image-id"),
-		Region:         viper.GetString("region"),
-		MasterSize:     viper.GetString("master-size"),
-		NodeSize:       viper.GetString("node-size"),
-		ClusterName:    name,
-		NumNode:        viper.GetInt("num-nodes"),
-		AnsibleVarFile: config.GetClusterInputPath(name, "create"),
+		KeyID:       viper.GetString("key-id"),
+		KeySecret:   viper.GetString("key-secret"),
+		ImageID:     viper.GetString("image-id"),
+		Region:      viper.GetString("region"),
+		MasterSize:  viper.GetString("master-size"),
+		NodeSize:    viper.GetString("node-size"),
+		ClusterName: name,
+		NumNode:     viper.GetInt("num-nodes"),
+		// AnsibleVarFile: config.GetClusterInputPath(name, "create"),
 	}, nil
+}
+
+func generateConfigFiles(args *DeploymentArguments) (deployFileName, paramFileName string, err error) {
+
+	workingDir := filepath.Join(helper.RootDir, args.ClusterName)
+	_, err = os.Stat(workingDir)
+	if !(os.IsNotExist(err) || retry) {
+		return deployFileName, paramFileName, fmt.Errorf("working dir %s is not clean, can't work in create mode", workingDir)
+	}
+
+	inputDir := filepath.Join(workingDir, "input", "create")
+	err = os.MkdirAll(inputDir, 0700)
+	if err != nil {
+		return deployFileName, paramFileName, err
+	}
+
+	deployFileName = filepath.Join(inputDir, "aliyun-create.yaml")
+	deployFile, err := os.OpenFile(deployFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
+	if err != nil {
+		return deployFileName, paramFileName, err
+	}
+	err = helper.RenderTemplateToFile(create.AliyunTemplate, deployFile, args)
+	if err != nil {
+		return deployFileName, paramFileName, err
+	}
+
+	paramFileName = filepath.Join(inputDir, "ansible-create.yaml")
+	paramFile, err := os.OpenFile(paramFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
+	if err != nil {
+		return deployFileName, paramFileName, err
+	}
+	err = helper.RenderTemplateToFile(create.AnsibleTemplate, paramFile, args)
+	if err != nil {
+		return deployFileName, paramFileName, err
+	}
+
+	return deployFileName, paramFileName, nil
 }
 
 func runDeploy(configFile string) error {
