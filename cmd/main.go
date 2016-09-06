@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/cheyang/fog/cmd/kube-deployer/remove"
-	"github.com/cheyang/fog/cmd/kube-deployer/scale"
+	"github.com/cheyang/fog/cmd/kube-deployer/cmd/remove"
+	"github.com/cheyang/fog/cmd/kube-deployer/cmd/scale"
 	"github.com/cheyang/kube-deployer/cmd/create"
 	"github.com/docker/machine/libmachine/log"
 	"github.com/spf13/cobra"
