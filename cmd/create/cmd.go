@@ -87,7 +87,8 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*deployer_type.Deployme
 	if name == "" {
 		return nil, errors.New("--cluster-name is mandatory")
 	}
-	retry, err := flags.GetBool("retry")
+	var err error
+	retry, err = flags.GetBool("retry")
 	if err != nil {
 		return nil, err
 	}
