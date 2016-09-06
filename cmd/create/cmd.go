@@ -60,17 +60,8 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, e
 	if !cmd.Flags().Changed("key-id") {
 		return nil, errors.New("--key-id are mandatory")
 	}
-	keyId, err := cmd.Flags().GetString("key-id")
-	if err != nil {
-		return nil, err
-	}
-
 	if !cmd.Flags().Changed("key-secret") {
 		return nil, errors.New("--key-secret are mandatory")
-	}
-	keySecret, err := cmd.Flags().GetString("key-secret")
-	if err != nil {
-		return nil, err
 	}
 
 	viper.BindEnv("key-id", "ALIYUNECS_KEY_ID")
