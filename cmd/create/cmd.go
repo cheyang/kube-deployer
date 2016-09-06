@@ -10,33 +10,25 @@ import (
 	"github.com/cheyang/fog/cluster"
 	"github.com/cheyang/fog/types"
 	"github.com/cheyang/fog/util/yaml"
+	"github.com/cheyang/kube-deployer/config"
+	_ "github.com/cheyang/kube-deployer/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-type DeploymentArguments struct {
-	KeyID       string
-	KeySecret   string
-	ImageID     string
-	Region      string
-	MasterSize  string
-	NodeSize    string
-	ClusterName string
-	NumNode     int
-	Retry       bool
-}
-
 var (
 	Cmd = &cobra.Command{
 		Use:   "create",
-		Short: "Create a k8s cluster in Aliyun",
+		Short: "create a k8s cluster in Aliyun",
 		RunE: func(cmd *cobra.Command, args []string) error {
 
 			deployArgs, err := parseDeployArgs(cmd, args)
 			if err != nil {
 				return err
 			}
-			fmt.Printf("args: %+v", deployArgs)
+			fmt.Printf("args: %+v\n", deployArgs)
+
+			files := config.GenerateConfigFile(deployArgs.ClusterName, deployArgs)
 
 			return nil
 		},
@@ -83,15 +75,18 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, e
 		return nil, errors.New("--key-secret are mandatory")
 	}
 
+	name := viper.GetString("cluster-name")
+
 	return &DeploymentArguments{
-		KeyID:       viper.GetString("key-id"),
-		KeySecret:   viper.GetString("key-secret"),
-		ImageID:     viper.GetString("image-id"),
-		Region:      viper.GetString("region"),
-		MasterSize:  viper.GetString("master-size"),
-		NodeSize:    viper.GetString("node-size"),
-		ClusterName: viper.GetString("cluster-name"),
-		NumNode:     viper.GetInt("num-nodes"),
+		KeyID:          viper.GetString("key-id"),
+		KeySecret:      viper.GetString("key-secret"),
+		ImageID:        viper.GetString("image-id"),
+		Region:         viper.GetString("region"),
+		MasterSize:     viper.GetString("master-size"),
+		NodeSize:       viper.GetString("node-size"),
+		ClusterName:    name,
+		NumNode:        viper.GetInt("num-nodes"),
+		AnsibleVarFile: config.GetClusterInputPath(name),
 	}, nil
 }
 
