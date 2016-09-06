@@ -57,13 +57,6 @@ func init() {
 }
 
 func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, error) {
-	if !cmd.Flags().Changed("key-id") {
-		return nil, errors.New("--key-id are mandatory")
-	}
-	if !cmd.Flags().Changed("key-secret") {
-		return nil, errors.New("--key-secret are mandatory")
-	}
-
 	viper.BindEnv("key-id", "ALIYUNECS_KEY_ID")
 	viper.BindEnv("key-secret", "ALIYUNECS_KEY_SECRET")
 	viper.BindEnv("image-id", "ALIYUNECS_IMAGE_ID")
@@ -82,6 +75,13 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, e
 	viper.BindPFlag("cluster-name", flags.Lookup("cluster-name"))
 	viper.BindPFlag("num-nodes", flags.Lookup("num-nodes"))
 	viper.BindPFlag("retry", flags.Lookup("retry"))
+
+	if viper.GetString("key-id") == "" {
+		return nil, errors.New("--key-id are mandatory")
+	}
+	if viper.GetString("key-secret") == "" {
+		return nil, errors.New("--key-secret are mandatory")
+	}
 
 	return &DeploymentArguments{
 		KeyID:       viper.GetString("key-id"),
