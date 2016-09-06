@@ -10,6 +10,7 @@ import (
 
 	"github.com/cheyang/fog/cluster"
 	"github.com/cheyang/fog/types"
+	"github.com/cheyang/fog/util"
 	"github.com/cheyang/fog/util/yaml"
 	"github.com/cheyang/kube-deployer/helper"
 	"github.com/cheyang/kube-deployer/templates/create"
@@ -36,6 +37,7 @@ var (
 			}
 			fmt.Printf("deployFile %s\n", deployFile)
 			fmt.Printf("paramFile %s\n", paramFile)
+			// return runDeploy(deployFile)
 			return nil
 		},
 	}
@@ -108,7 +110,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*deployer_type.Deployme
 
 func generateConfigFiles(args *deployer_type.DeploymentArguments) (deployFileName, paramFileName string, err error) {
 
-	workingDir := filepath.Join(helper.RootDir, args.ClusterName)
+	workingDir := filepath.Join(helper.GetRootDir(), args.ClusterName)
 	_, err = os.Stat(workingDir)
 	if !(os.IsNotExist(err) || retry) {
 		return deployFileName, paramFileName, fmt.Errorf("working dir %s is not clean, can't work in create mode", workingDir)
@@ -163,6 +165,8 @@ func runDeploy(configFile string) error {
 
 	retry := viper.GetBool("retry")
 	spec.Update = retry
+
+	util.SetStoreRoot(helper.Root)
 
 	return cluster.Bootstrap(spec)
 }

@@ -1,11 +1,12 @@
 package helper
 
 import (
+	"fmt"
 	"os"
 	"text/template"
 )
 
-const RootDir string = "/etc/.kube_aliyun/"
+const Root string = "kube_aliyun"
 
 func RenderTemplateToFile(content string, file *os.File, data interface{}) error {
 	tmpl := template.New(file.Name())
@@ -15,4 +16,8 @@ func RenderTemplateToFile(content string, file *os.File, data interface{}) error
 		return err
 	}
 	return tmpl.Execute(file, data)
+}
+
+func GetRootDir() string {
+	return fmt.Sprintf("/etc/.%s", Root)
 }
