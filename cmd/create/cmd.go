@@ -121,6 +121,9 @@ func generateConfigFiles(args *deployer_type.DeploymentArguments) (deployFileNam
 	}
 
 	deployFileName = filepath.Join(inputDir, "aliyun-create.yaml")
+	paramFileName = filepath.Join(inputDir, "ansible-create.yaml")
+	args.AnsibleVarFile = paramFileName
+
 	deployFile, err := os.OpenFile(deployFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
 		return deployFileName, paramFileName, err
@@ -130,7 +133,6 @@ func generateConfigFiles(args *deployer_type.DeploymentArguments) (deployFileNam
 		return deployFileName, paramFileName, err
 	}
 
-	paramFileName = filepath.Join(inputDir, "ansible-create.yaml")
 	paramFile, err := os.OpenFile(paramFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
 		return deployFileName, paramFileName, err
