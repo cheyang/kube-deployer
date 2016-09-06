@@ -13,7 +13,7 @@ import (
 	"github.com/cheyang/fog/util/yaml"
 	"github.com/cheyang/kube-deployer/helper"
 	"github.com/cheyang/kube-deployer/templates/create"
-	_ "github.com/cheyang/kube-deployer/types"
+	deployer_type "github.com/cheyang/kube-deployer/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -56,7 +56,7 @@ func init() {
 	flags.BoolP("retry", "r", false, "retry to create k8s cluster.")
 }
 
-func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, error) {
+func parseDeployArgs(cmd *cobra.Command, args []string) (*deployer_type.DeploymentArguments, error) {
 	viper.BindEnv("key-id", "ALIYUNECS_KEY_ID")
 	viper.BindEnv("key-secret", "ALIYUNECS_KEY_SECRET")
 	viper.BindEnv("image-id", "ALIYUNECS_IMAGE_ID")
@@ -84,7 +84,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, e
 	}
 
 	name := viper.GetString("cluster-name")
-	if name == nil {
+	if name == "" {
 		return nil, errors.New("--cluster-name is mandatory")
 	}
 	retry, err := flags.GetBool("retry")
@@ -92,7 +92,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, e
 		return nil, err
 	}
 
-	return &DeploymentArguments{
+	return &deployer_type.DeploymentArguments{
 		KeyID:       viper.GetString("key-id"),
 		KeySecret:   viper.GetString("key-secret"),
 		ImageID:     viper.GetString("image-id"),
@@ -105,7 +105,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, e
 	}, nil
 }
 
-func generateConfigFiles(args *DeploymentArguments) (deployFileName, paramFileName string, err error) {
+func generateConfigFiles(args *deployer_type.DeploymentArguments) (deployFileName, paramFileName string, err error) {
 
 	workingDir := filepath.Join(helper.RootDir, args.ClusterName)
 	_, err = os.Stat(workingDir)
