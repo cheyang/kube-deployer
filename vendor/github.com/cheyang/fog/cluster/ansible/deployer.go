@@ -60,27 +60,48 @@ func (this ansibleManager) Run() error {
 	logrus.Infof("inventory file: %s\n", inventoryFile)
 
 	if this.containerCreateConfig != nil {
-		id, err := this.startContainer()
-		if err != nil {
-			return err
-		}
-		err = this.printContainerLogs(id)
-		if err != nil {
-			return err
-		}
-		c, err := this.inspectContainer(id)
-		if err != nil {
-			return err
-		}
-		if c.State.ExitCode != 0 {
-			logrus.Infof("Exit failed %v, rc is %d", c.State.Error, c.State.ExitCode)
-		} else {
-			logrus.Infoln("Exit successfully.")
-		}
+		return this.dockerRun()
 	} else {
-
+		// run command
 	}
 
+	return nil
+}
+
+func (this *ansibleManager) dockerRun() error {
+	err := this.initDockerClient()
+	if err != nil {
+		return err
+	}
+	err = this.pullImage()
+	if err != nil {
+		// return err
+		if !this.imageExist() {
+			return err
+		} else {
+			logrus.WithError(err).Warnf("the image %s is not downloaded from remote repo",
+				this.containerCreateConfig.Config.Image)
+		}
+	}
+
+	id, err := this.startContainer()
+	if err != nil {
+		return err
+	}
+	err = this.printContainerLogs(id)
+	if err != nil {
+		return err
+	}
+	c, err := this.inspectContainer(id)
+	if err != nil {
+		return err
+	}
+	if c.State.ExitCode != 0 {
+		// logrus.Errorf("Exit failed %v, rc is %d", c.State.Error, c.State.ExitCode)
+		return fmt.Errorf("Exit failed %v, rc is %d", c.State.Error, c.State.ExitCode)
+	} else {
+		logrus.Infoln("Exit successfully.")
+	}
 	return nil
 }
 

@@ -14,13 +14,33 @@ import (
 	"golang.org/x/net/context"
 )
 
+func (this *ansibleManager) initDockerClient() (err error) {
+	dockerClient, err = docker_client.NewEnvClient()
+	return err
+}
+
+func (this *ansibleManager) pullImage() error {
+	ctx := context.Background()
+	_, err := dockerClient.ImagePull(ctx,
+		this.containerCreateConfig.Config.Image,
+		docker.ImagePullOptions{})
+	return err
+}
+
+func (this *ansibleManager) imageExist() bool {
+	found := true
+	ctx := context.Background()
+	_, _, err := dockerClient.ImageInspectWithRaw(ctx, this.containerCreateConfig.Config.Image)
+	if err != nil {
+		found = false
+		logrus.WithError(err).Errorf("failed to inspect image %s",
+			this.containerCreateConfig.Config.Image)
+	}
+	return found
+}
+
 func (this *ansibleManager) startContainer() (id string, err error) {
 	ctx := context.Background()
-	dockerClient, err = docker_client.NewEnvClient()
-	if err != nil {
-		return id, err
-	}
-
 	config := this.containerCreateConfig.Config
 	hostConfig := this.containerCreateConfig.HostConfig
 	if hostConfig == nil {
