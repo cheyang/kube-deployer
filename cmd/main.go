@@ -64,7 +64,7 @@ var mainCmd = &cobra.Command{
 		}
 
 		if flags.Changed("docker-version") {
-			dockerVersion, err := flags.GetString(name)
+			dockerVersion, err := flags.GetString("docker-version")
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
 				os.Exit(1)
