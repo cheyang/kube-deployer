@@ -5,9 +5,9 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/cheyang/fog/cmd/fogctl/remove"
+	"github.com/cheyang/fog/cmd/fogctl/scale"
 	"github.com/cheyang/kube-deployer/cmd/create"
-	"github.com/cheyang/kube-deployer/cmd/remove"
-	"github.com/cheyang/kube-deployer/cmd/scale"
 	"github.com/docker/machine/libmachine/log"
 	"github.com/spf13/cobra"
 )
