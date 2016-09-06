@@ -1,12 +1,9 @@
 package cloudprovider
 
-import (
-	"github.com/cheyang/fog/types"
-	"github.com/docker/machine/libmachine/drivers"
-)
+import "github.com/cheyang/fog/types"
 
 type CloudInterface interface {
-	SetConfigFromFlags(opts drivers.DriverOptions) error
+	// SetConfigFromFlags(opts drivers.DriverOptions) error
 
 	SetHosts(hosts []types.Host)
 
