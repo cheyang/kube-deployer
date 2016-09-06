@@ -32,8 +32,13 @@ var (
 		Short: "Create a k8s cluster in Aliyun",
 		RunE: func(cmd *cobra.Command, args []string) error {
 
-			deployArgs := parseDeployArgs(cmd, args)
+			deployArgs, err := parseDeployArgs(cmd, args)
+			if err != nil {
+				return err
+			}
 			fmt.Printf("args: %+v", deployArgs)
+
+			return nil
 		},
 	}
 )
@@ -85,6 +90,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*DeploymentArguments, e
 	viper.BindPFlag("node-size", flags.Lookup("node-size"))
 	viper.BindPFlag("cluster-name", flags.Lookup("cluster-name"))
 	viper.BindPFlag("num-nodes", flags.Lookup("num-nodes"))
+	viper.BindPFlag("retry", flags.Lookup("retry"))
 
 	return &DeploymentArguments{
 		KeyID:       viper.GetString("key-id"),
@@ -114,10 +120,7 @@ func runDeploy(configFile string) error {
 		return err
 	}
 
-	retry, err := cmd.Flags().GetBool("retry")
-	if err != nil {
-		return err
-	}
+	retry := viper.GetBool("retry")
 	spec.Update = retry
 
 	return cluster.Bootstrap(spec)
