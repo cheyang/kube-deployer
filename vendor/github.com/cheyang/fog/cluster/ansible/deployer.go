@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/cheyang/fog/cluster/deploy"
@@ -21,8 +22,9 @@ const ansibleEtc = "/etc/ansible"
 var dockerClient *docker_client.Client
 
 var (
-	ansibleHostFile   string
-	ansibleSSHkeysDir string
+	ansibleHostFile   string // inside container
+	ansibleSSHkeysDir string // inside container
+	inventoryFile     string // inventory file in host
 )
 
 func init() {
@@ -52,8 +54,8 @@ func NewDeployer(name string) (deploy.Deployer, error) {
 }
 
 func (this ansibleManager) Run() error {
-
-	inventoryFile, err := this.createInventoryFile()
+	var err error
+	inventoryFile, err = this.createInventoryFile()
 	if err != nil {
 		return err
 	}
@@ -64,7 +66,6 @@ func (this ansibleManager) Run() error {
 	} else {
 		// run command
 	}
-
 	return nil
 }
 
@@ -153,7 +154,10 @@ func (this *ansibleManager) createInventoryFile() (path string, err error) {
 	}
 
 	deploymentDir := storage.GetDeploymentDir()
-	path = filepath.Join(deploymentDir, "inventory")
+	t := time.Now()
+	timestamp := fmt.Sprint(t.Format("20060102150405"))
+	filename := "inventory_" + timestamp
+	path = filepath.Join(deploymentDir, filename)
 	f, err := os.Create(path)
 	defer f.Close()
 
