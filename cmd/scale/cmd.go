@@ -46,10 +46,6 @@ var (
 			if err != nil {
 				return err
 			}
-			hostList, err := helper.GetCurrentHosts(storage)
-			if err != nil {
-				return err
-			}
 			spec, err := storage.LoadSpec()
 			if err != nil {
 				return err
