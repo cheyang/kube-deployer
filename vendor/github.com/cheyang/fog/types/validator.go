@@ -42,9 +42,10 @@ func Validate(specs Spec) error {
 	if len(specs.Run) == 0 && specs.DockerRun == nil {
 		return fmt.Errorf("DockerRun and Run can't be empty either")
 	}
-
-	if _, err := docker_client.NewEnvClient(); err != nil {
-		return err
+	if specs.DockerRun != nil {
+		if _, err := docker_client.NewEnvClient(); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -65,5 +66,9 @@ func validateMap(props map[string]interface{}) error {
 		}
 	}
 
+	return nil
+}
+
+func ValidateAppendSpec(spec Spec) error {
 	return nil
 }

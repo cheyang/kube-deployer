@@ -28,7 +28,7 @@ func Scale(s persist.Store, desiredMap map[string]int) error {
 	if err != nil {
 		return nil
 	}
-	defer s.SaveSpec(spec)
+	// defer s.SaveSpec(spec)
 	// vm spec name: index
 	runningMap := make(map[string]types.VMSpec)
 	for _, vmSpec := range spec.VMSpecs {
@@ -94,7 +94,7 @@ func buildScaleList(currentHostMap map[string][]string, desiredHostMap map[strin
 }
 
 // Get the name list
-func buildcurrentHostMap(hosts []*types.Host, runningMap map[string]types.VMSpec) (currentHostMap map[string][]string) {
+func buildcurrentHostMap(hosts []types.Host, runningMap map[string]types.VMSpec) (currentHostMap map[string][]string) {
 	currentHostMap = make(map[string][]string)
 	for k, _ := range runningMap {
 		currentHostMap[k] = make([]string, 0)

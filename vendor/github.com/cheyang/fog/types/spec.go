@@ -1,6 +1,11 @@
 package types
 
 import (
+	"bytes"
+	"io/ioutil"
+	"os"
+
+	"github.com/cheyang/fog/util/yaml"
 	docker "github.com/docker/engine-api/types"
 	"github.com/docker/machine/libmachine/drivers"
 	"github.com/docker/machine/libmachine/state"
@@ -23,6 +28,7 @@ type VMSpec struct {
 	Properties      map[string]interface{} `json:"Properties,omitempty"`
 	CloudDriverName string                 `json:"Driver"`
 	Instances       int                    `json:"Instances,omitempty"`
+	Start           int                    `json:"Start,omitempty"`
 }
 
 type Host struct {
@@ -43,10 +49,16 @@ type Host struct {
 	TemplateName string
 }
 
-// type ContainerCreateConfig struct {
-// 	Name             string
-// 	Config           *container.Config
-// 	HostConfig       *container.HostConfig
-// 	NetworkingConfig *network.NetworkingConfig
-// 	AdjustCPUShares  bool
-// }
+func LoadSpec(configFile string) (spec Spec, err error) {
+	spec = Spec{}
+	if _, err := os.Stat(configFile); os.IsNotExist(err) {
+		return spec, err
+	}
+	data, err := ioutil.ReadFile(configFile)
+	if err != nil {
+		return spec, err
+	}
+	decoder := yaml.NewYAMLToJSONDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&spec)
+	return spec, err
+}
