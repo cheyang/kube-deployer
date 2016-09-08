@@ -53,7 +53,7 @@ func init() {
 	flags.StringP("master-size", "", "ecs.n1.small", "The size of master virtual machine")
 	flags.StringP("node-size", "", "ecs.n1.small", "The size of node virtual machine")
 	flags.StringP("cluster-name", "", "mycluster", "The k8s cluster name")
-	flags.IntP("num-nodes", "", 2, "The number of k8s node")
+	flags.UintP("num-nodes", "", 2, "The number of k8s node")
 	flags.BoolP("retry", "r", false, "retry to create k8s cluster.")
 }
 
@@ -74,7 +74,6 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments,
 	viper.BindPFlag("master-size", flags.Lookup("master-size"))
 	viper.BindPFlag("node-size", flags.Lookup("node-size"))
 	viper.BindPFlag("cluster-name", flags.Lookup("cluster-name"))
-	viper.BindPFlag("num-nodes", flags.Lookup("num-nodes"))
 	viper.BindPFlag("retry", flags.Lookup("retry"))
 
 	if viper.GetString("key-id") == "" {
@@ -100,7 +99,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments,
 		Region:     viper.GetString("region"),
 		MasterSize: viper.GetString("master-size"),
 		Arguments: types.Arguments{
-			NumNode:     viper.GetInt("num-nodes"),
+			NumNode:     flags.GetUint("num-nodes"),
 			ImageID:     viper.GetString("image-id"),
 			NodeSize:    viper.GetString("node-size"),
 			ClusterName: name,

@@ -22,7 +22,7 @@ type ScaleArguments struct {
 }
 
 type Arguments struct {
-	NumNode        int
+	NumNode        uint
 	ImageID        string
 	NodeSize       string
 	ClusterName    string

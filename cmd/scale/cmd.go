@@ -37,21 +37,37 @@ var (
 				return errors.New("scale out/in command takes only 1 argument")
 			}
 			name = args[len(args)-1]
-
 			scaleArgs, err = parseScaleArgs(cmd, args)
 			if err != nil {
 				return err
 			}
+			desriedNum := scaleArgs.NumNode
+
 			storage, err = util.GetStorage(name)
 			if err != nil {
 				return err
 			}
+			// find out running num
+			hostList, _, err := persist.LoadAllHosts(storage)
+			if err != nil {
+				return err
+			}
+			runningHostMap, err := util.BuildRunningMap(hostList)
+			if err != nil {
+				return err
+			}
+			var runningNum uint
+			if list, found := runningHostMap[slaveName]; found {
+				runningNum = len(list)
+			} else {
+				return fmt.Errorf("can't scale out/in %s, becasue it doesn't exist.", slaveName)
+			}
+
+			// build vmspec for scaling out
 			spec, err := storage.LoadSpec()
 			if err != nil {
 				return err
 			}
-
-			// build vmspec for scaling out
 			for _, vmSpec := range spec.VMSpecs {
 				if vmSpec.Name == "" {
 					slaveSpec = &vmSpec
@@ -65,7 +81,7 @@ var (
 			}
 
 			// scale out
-			if scaleArgs.NumNode > 0 {
+			if runningNum < desiredNum {
 				deployFile, paramFile, err := generateConfigFiles(scaleArgs)
 				if err != nil {
 					return err
@@ -74,19 +90,24 @@ var (
 				fmt.Printf("paramFile %s\n", paramFile)
 
 				newSpec, err := fog.LoadSpec(deployFile)
+				defer storage.SaveSpec(newSpec)
 				if err != nil {
 					return err
 				}
+				slaveSpec.Instances = desiredNum - runningNum
 				newSpec.VMSpecs[0] = *slaveSpec
 				roleMap := map[string]bool{
 					"masters": true,
 					"etcd":    true,
 				}
 
-				return cluster.ExpandCluster(storage, newSpec, roleMap)
+				return cluster.Scaleout(storage, newSpec, roleMap)
 				// scale in
-			} else if scaleArgs.NumNode < 0 {
-				return errors.New("Not implmented yet.")
+			} else if runningNum > desiredNum {
+				gap := runningNum - desiredNum
+				return cluster.Scalein(storage, map[string]uint{
+					slaveName: gap,
+				})
 			}
 			return nil
 		},
@@ -95,7 +116,8 @@ var (
 
 func init() {
 	flags := Cmd.Flags()
-	flags.StringP("scale-num-nodes", "", "", "The number of k8s node to scale out or in, can be +1 or -1")
+	// flags.StringP("scale-num-nodes", "", "", "The number of k8s node to scale out or in, can be +1 or -1")
+	flags.UintP("num-nodes", "", 2, "The number of k8s node")
 	flags.StringP("key-id", "", "", "ECS Access Key id")
 	flags.StringP("key-secret", "", "", "ECS Access Key secret")
 	flags.StringP("image-id", "", "entos7u2_64_40G_cloudinit_20160520.raw", "ECS image id to create k8s cluster")
@@ -113,7 +135,7 @@ func parseScaleArgs(cmd *cobra.Command, args []string) (*types.ScaleArguments, e
 	viper.BindPFlag("key-secret", flags.Lookup("key-secret"))
 	viper.BindPFlag("image-id", flags.Lookup("image-id"))
 	viper.BindPFlag("node-size", flags.Lookup("node-size"))
-	viper.BindPFlag("scale-num-nodes", flags.Lookup("scale-num-nodes"))
+	viper.BindPFlag("num-nodes", flags.Lookup("num-nodes"))
 
 	if viper.GetString("key-id") == "" {
 		return nil, errors.New("--key-id is mandatory")
@@ -121,15 +143,23 @@ func parseScaleArgs(cmd *cobra.Command, args []string) (*types.ScaleArguments, e
 	if viper.GetString("key-secret") == "" {
 		return nil, errors.New("--key-secret is mandatory")
 	}
+	if !flags.Changed("num-nodes") {
+		return nil, errors.New("--num-nodes is mandatory")
+	}
 
-	scaleNumNode, err := helper.ParseScaleFlag(viper.GetString("scale-num-nodes"))
+	numNodes, err := flags.GetUint("num-nodes")
 	if err != nil {
 		return nil, err
 	}
 
+	// scaleNumNode, err := helper.ParseScaleFlag(viper.GetString("scale-num-nodes"))
+	// if err != nil {
+	// 	return nil, err
+	// }
+
 	return &types.ScaleArguments{
 		Arguments: types.Arguments{
-			NumNode:     scaleNumNode,
+			NumNode:     numNodes,
 			ImageID:     viper.GetString("image-id"),
 			NodeSize:    viper.GetString("node-size"),
 			ClusterName: name,
