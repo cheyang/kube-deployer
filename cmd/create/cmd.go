@@ -10,7 +10,6 @@ import (
 
 	"github.com/cheyang/fog/cluster"
 	"github.com/cheyang/fog/types"
-	"github.com/cheyang/fog/util"
 	"github.com/cheyang/fog/util/yaml"
 	"github.com/cheyang/kube-deployer/helper"
 	"github.com/cheyang/kube-deployer/templates/create"
@@ -58,7 +57,7 @@ func init() {
 	flags.BoolP("retry", "r", false, "retry to create k8s cluster.")
 }
 
-func parseDeployArgs(cmd *cobra.Command, args []string) (*deployer_type.DeploymentArguments, error) {
+func parseDeployArgs(cmd *cobra.Command, args []string) (*deployer_type.DeployArguments, error) {
 	viper.BindEnv("key-id", "ALIYUNECS_KEY_ID")
 	viper.BindEnv("key-secret", "ALIYUNECS_KEY_SECRET")
 	viper.BindEnv("image-id", "ALIYUNECS_IMAGE_ID")
@@ -95,17 +94,19 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*deployer_type.Deployme
 		return nil, err
 	}
 
-	return &deployer_type.DeploymentArguments{
-		KeyID:       viper.GetString("key-id"),
-		KeySecret:   viper.GetString("key-secret"),
-		ImageID:     viper.GetString("image-id"),
-		Region:      viper.GetString("region"),
-		MasterSize:  viper.GetString("master-size"),
-		NodeSize:    viper.GetString("node-size"),
-		ClusterName: name,
-		NumNode:     viper.GetInt("num-nodes"),
-		// AnsibleVarFile: config.GetClusterInputPath(name, "create"),
+	return &deployer_type.DeployArguments{
+		KeyID:      viper.GetString("key-id"),
+		KeySecret:  viper.GetString("key-secret"),
+		Region:     viper.GetString("region"),
+		MasterSize: viper.GetString("master-size"),
+		Arguments: deployer_type.Arguments{
+			NumNode:     viper.GetInt("num-nodes"),
+			ImageID:     viper.GetString("image-id"),
+			NodeSize:    viper.GetString("node-size"),
+			ClusterName: name,
+		},
 	}, nil
+
 }
 
 func generateConfigFiles(args *deployer_type.DeploymentArguments) (deployFileName, paramFileName string, err error) {
@@ -165,8 +166,6 @@ func runDeploy(configFile string) error {
 
 	retry := viper.GetBool("retry")
 	spec.Update = retry
-
-	util.SetStoreRoot(helper.Root)
 
 	return cluster.Bootstrap(spec)
 }

@@ -2,7 +2,7 @@ package create
 
 var AliyunTemplate string = `
 --- 
-ClusterName: mycluster
+ClusterName: [[[ .ClusterName ]]]
 ClusterType: k8s
 DockerRun: 
   Config: 

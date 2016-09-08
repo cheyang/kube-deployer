@@ -5,9 +5,11 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/cheyang/fog/util"
 	"github.com/cheyang/kube-deployer/cmd/create"
 	"github.com/cheyang/kube-deployer/cmd/remove"
 	"github.com/cheyang/kube-deployer/cmd/scale"
+	"github.com/cheyang/kube-deployer/helper"
 	"github.com/docker/machine/libmachine/log"
 	"github.com/spf13/cobra"
 )
@@ -76,6 +78,7 @@ var mainCmd = &cobra.Command{
 			}
 		}
 
+		util.SetStoreRoot(helper.Root)
 	},
 }
 

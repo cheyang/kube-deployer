@@ -2,70 +2,99 @@ package scale
 
 import (
 	"errors"
-	"fmt"
-	"os"
-	"strconv"
-	"strings"
 
-	"github.com/cheyang/fog/cluster"
 	"github.com/cheyang/fog/persist"
+	"github.com/cheyang/fog/types"
 	"github.com/cheyang/fog/util"
+	"github.com/cheyang/kube-deployer/helper"
+	deployer_type "github.com/cheyang/kube-deployer/types"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var (
-	Cmd = &cobra.Command{
+	name = ""
+	Cmd  = &cobra.Command{
 		Use:   "scale",
 		Short: "scale out/in a k8s cluster",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if len(args) == 0 {
-				return errors.New("scale out/in command takes no arguments")
+			var (
+				storage   persist.Store
+				err       error
+				spec      types.Spec
+				slaveSpec types.VMSpec
+			)
+
+			if len(args) != 1 {
+				return errors.New("scale out/in command takes only 1 argument")
 			}
+			name = args[len(args)-1]
 
-			desireMap := make(map[string]int)
-			var name string
-
-			for i, arg := range args {
-				if i == len(args)-1 {
-					name = arg
-					break
-				}
-
-				kv := strings.Split(arg, "=")
-
-				if len(kv) == 2 {
-					// desireMap[kv[0]]
-					value, err := strconv.Atoi(kv[1])
-					if err != nil {
-						return err
-					}
-					key := kv[0]
-					desireMap[key] = value
-				} else {
-					return fmt.Errorf("the format of %s is not correct!", arg)
-				}
+			storage, err = util.GetStorage(name)
+			if err != nil {
+				return err
 			}
-
-			storePath, err := util.GetStorePath(name)
+			scaleArgs, err := parseScaleArgs(cmd, args)
+			if err != nil {
+				return err
+			}
+			hostList, err := helper.GetCurrentHosts(storage)
+			if err != nil {
+				return err
+			}
+			spec, err = storage.LoadSpec()
 			if err != nil {
 				return err
 			}
 
-			if _, err := os.Stat(storePath); os.IsNotExist(err) {
-				return fmt.Errorf("Failed to find the storage of cluster %s in %s",
-					name,
-					storePath)
+			for _, vmSpec := range spec.VMSpecs {
+
 			}
-
-			storage := persist.NewFilestore(storePath)
-
-			return cluster.Scale(storage, desireMap)
 		},
 	}
 )
 
 func init() {
 	flags := Cmd.Flags()
-	flags.StringP("with-roles", "w", "", "If you need the inventory file also includes role")
+	flags.StringP("scale-num-nodes", "", "", "The number of k8s node to scale out or in, can be +1 or -1")
+	flags.StringP("key-id", "", "", "ECS Access Key id")
+	flags.StringP("key-secret", "", "", "ECS Access Key secret")
+	flags.StringP("image-id", "", "entos7u2_64_40G_cloudinit_20160520.raw", "ECS image id to create k8s cluster")
+	flags.StringP("node-size", "", "ecs.n1.small", "The size of node virtual machine")
+}
+
+func parseScaleArgs(cmd *cobra.Command, args []string) (*deployer_type.ScaleArguments, error) {
+	viper.BindEnv("key-id", "ALIYUNECS_KEY_ID")
+	viper.BindEnv("key-secret", "ALIYUNECS_KEY_SECRET")
+	viper.BindEnv("image-id", "ALIYUNECS_IMAGE_ID")
+	viper.BindEnv("node-size", "ALIYUNECS_NODE_SIZE")
+
+	flags := cmd.Flags()
+	viper.BindPFlag("key-id", flags.Lookup("key-id"))
+	viper.BindPFlag("key-secret", flags.Lookup("key-secret"))
+	viper.BindPFlag("image-id", flags.Lookup("image-id"))
+	viper.BindPFlag("node-size", flags.Lookup("node-size"))
+	viper.BindPFlag("scale-num-nodes", flags.Lookup("scale-num-nodes"))
+
+	if viper.GetString("key-id") == "" {
+		return nil, errors.New("--key-id is mandatory")
+	}
+	if viper.GetString("key-secret") == "" {
+		return nil, errors.New("--key-secret is mandatory")
+	}
+
+	scaleNumNode, err := helper.ParseScaleFlag(viper.GetString("scale-num-nodes"))
+	if err != nil {
+		return nil, err
+	}
+
+	return &deployer_type.ScaleArguments{
+		Arguments: deployer_type.Arguments{
+			NumNode:     scaleNumNode,
+			ImageID:     viper.GetString("image-id"),
+			NodeSize:    viper.GetString("node-size"),
+			ClusterName: name,
+		},
+	}, nil
 
 }

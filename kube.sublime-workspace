@@ -1,0 +1,679 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ro",
+				"roleMap	map[string]bool ν"
+			],
+			[
+				"no",
+				"Now	time.Time ƒ"
+			],
+			[
+				"ne",
+				"newHosts	[]types.Host ν"
+			],
+			[
+				"re",
+				"requiredRoleMap	map[string]bool ν"
+			],
+			[
+				"run",
+				"runningHosts	[]*types.Host ν"
+			],
+			[
+				"inf",
+				"Infof	 ƒ"
+			],
+			[
+				"in",
+				"Infof	 ƒ"
+			],
+			[
+				"host",
+				"hostname	string ν"
+			],
+			[
+				"im",
+				"ImagePull	io.ReadCloser, error ƒ"
+			],
+			[
+				"docker",
+				"dockerClient	*docker_client.Client ν"
+			],
+			[
+				"clou",
+				"cloudDriverName	string ν"
+			],
+			[
+				"str",
+				"StringP	*string ƒ"
+			],
+			[
+				"main",
+				"mainCmd	*cobra.Command ν"
+			],
+			[
+				"pr",
+				"Printf	n int, err error ƒ"
+			],
+			[
+				"de",
+				"debugFlag	bool ν"
+			],
+			[
+				"boo",
+				"BoolP	*bool ƒ"
+			],
+			[
+				"va",
+				"validateBinds	error ƒ"
+			],
+			[
+				"nam",
+				"nameMap	map[string]string ν"
+			],
+			[
+				"prn",
+				"Printf	n int, err error ƒ"
+			],
+			[
+				"p",
+				"Printf	n int, err error ƒ"
+			],
+			[
+				"Pr",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"info",
+				"Infof	 ƒ"
+			],
+			[
+				"ssh",
+				"SSHUserName	string ν"
+			],
+			[
+				"s",
+				"SSHHostname	string ν"
+			],
+			[
+				"stor",
+				"storage	*persist.Filestore ν"
+			],
+			[
+				"Dri",
+				"DriverName	string ν"
+			],
+			[
+				"cre",
+				"CreateStorePath	error ƒ"
+			],
+			[
+				"bo",
+				"BoolP	*bool ƒ"
+			],
+			[
+				"fl",
+				"Flags	*pflag.FlagSet ƒ"
+			],
+			[
+				"o",
+				"Out	io.Writer ν"
+			],
+			[
+				"e",
+				"ExitCode	int ν"
+			],
+			[
+				"inspect",
+				"ContainerInspect	types.ContainerJSON, error ƒ"
+			],
+			[
+				"doc",
+				"dockerClient	*docker_client.Client ν"
+			],
+			[
+				"do",
+				"docker_client	 package ρ"
+			],
+			[
+				"Show",
+				"ShowStdout	bool ν"
+			],
+			[
+				"dep",
+				"deployer	deploy.Deployer ν"
+			],
+			[
+				"gen",
+				"genEnvsForAnsible	[]string ƒ"
+			],
+			[
+				"w",
+				"Warnf	 ƒ"
+			],
+			[
+				"ru",
+				"runInDocker	error ƒ"
+			],
+			[
+				"ansible",
+				"ansibleManager	struct ʈ"
+			],
+			[
+				"ans",
+				"ansibleManager	struct ʈ"
+			],
+			[
+				"ss",
+				"SSHKeyPath	string ν"
+			],
+			[
+				"an",
+				"ansibleManager	struct ʈ"
+			],
+			[
+				"rep",
+				"Replace	string ƒ"
+			],
+			[
+				"sp",
+				"Sprintf	string ƒ"
+			],
+			[
+				"wr",
+				"WriteString	int, error ƒ"
+			],
+			[
+				"des",
+				"desired	desiredConfig ν"
+			],
+			[
+				"desir",
+				"desiredHostMap	map[string]desiredConfig ν"
+			],
+			[
+				"bu",
+				"buildSpec	*types.Spec ƒ"
+			],
+			[
+				"buil",
+				"buildDesireMap	map[string]int ƒ"
+			],
+			[
+				"bui",
+				"buildMockHostList	[]*types.Host ƒ"
+			],
+			[
+				"to",
+				"toCreateHostSpecs	[]types.VMSpec ν"
+			],
+			[
+				"r",
+				"runningMap	map[string]types.VMSpec ν"
+			],
+			[
+				"typ",
+				"types	 package ρ"
+			],
+			[
+				"sc",
+				"scaleMap	map[string]int ν"
+			],
+			[
+				"st",
+				"storePath	string ν"
+			],
+			[
+				"hos",
+				"hostMap	map[string][]*types.Host ν"
+			],
+			[
+				"ho",
+				"hostMap	map[string][]*types.Host ν"
+			],
+			[
+				"getp",
+				"Getpid	int ƒ"
+			],
+			[
+				"caps",
+				"capsV3	struct ʈ"
+			],
+			[
+				"prin",
+				"Printf	n int, err error ƒ"
+			],
+			[
+				"b",
+				"BOUNDS	 Ɩ"
+			],
+			[
+				"cap",
+				"capability	 package ρ"
+			],
+			[
+				"ge",
+				"GetMetrics	*numa.MetricsResponse, error ƒ"
+			],
+			[
+				"dis",
+				"distance	Distance ν"
+			],
+			[
+				"me",
+				"MetricsResponse_Distance	struct ʈ"
+			],
+			[
+				"sin",
+				"signals	chan os.Signal ν"
+			],
+			[
+				"du",
+				"DurationVar	 ƒ"
+			],
+			[
+				"sigin",
+				"SIGINT	 Ɩ"
+			],
+			[
+				"set",
+				"SetOutput	 ƒ"
+			],
+			[
+				"un",
+				"Unavailable	 Ɩ"
+			],
+			[
+				"pb",
+				"pbNode	*pb.InfoResponse_Node ν"
+			],
+			[
+				"u",
+				"uint32"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 367.0,
+		"last_filter": "Package Control: insta",
+		"selected_items":
+		[
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install p",
+				"Package Control: Install Package"
+			],
+			[
+				"Gosublime",
+				"Plugin Development: Convert Syntax to .sublime-syntax"
+			]
+		],
+		"width": 485.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer"
+	],
+	"file_history":
+	[
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/deploy.sublime-project",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cluster/expand.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cluster/ansible/deployer.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cluster/ansible/docker.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/persist/store.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cmd/fogctl/expand/cmd.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/samples/k8s/aliyun/classic/scaleout/aliyun.yml",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/samples/k8s/aliyun/classic/scaleout/ansible.yml",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/samples/k8s/softlayer/create/ansible.yml",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cmd/fogctl/create/cmd.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cmd/fogctl/scale/cmd.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cmd/fogctl/main.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/util/util.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/persist/filestore.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/types/validator.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/types/spec.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/docs/user-guide/reference.md",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/vendor/github.com/denverdino/docker-machine-driver-aliyunecs/aliyunecs/ecs.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/denverdino/aliyungo/common/client.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/samples/k8s/aliyun/classic/aliyun.yml",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/util/yaml/mycluster_aliyun.yml",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/samples/softlayer/softlayer.yml",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/vendor/github.com/denverdino/aliyungo/ecs/instances.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/host/host_handler.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/Sirupsen/logrus/logrus.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/vendor/github.com/Sirupsen/logrus/logger.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/vendor/github.com/Sirupsen/logrus/entry.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/README.md",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/tools/main.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/util/yaml/sl.yml",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/util/helpers/options.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/vendor/github.com/docker/engine-api/client/client.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/vendor/github.com/Sirupsen/logrus/logrus.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/samples/aliyun/classic/ansible.yml",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/samples/aliyun/classic/aliyun.yml",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/types/mount_validator.go",
+		"/Users/lingerlove/Library/Application Support/Sublime Text 3/Packages/GoSublime/GoSublime.sublime-settings",
+		"/Users/lingerlove/Library/Application Support/Sublime Text 3/Packages/User/GoSublime.sublime-settings",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cluster/interfaces.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cluster/ansible/interfaces.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cluster/deployer.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/manager/manager.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/manager/orchestrator/replicated.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/manager/orchestrator/tasks.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/manager/orchestrator/replicated_test.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/manager/orchestrator/services.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/manager/orchestrator/global.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/manager/orchestrator/global_test.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/api/objects.proto",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/cmd/swarmd/main.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/agent/node.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/docker/swarmkit/manager/state/store/services.go",
+		"/Users/lingerlove/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/lingerlove/Library/Application Support/Sublime Text 3/Packages/User/Godef.sublime-settings",
+		"/Users/lingerlove/Library/Application Support/Sublime Text 3/Packages/GoSublime/Default (OSX).sublime-keymap",
+		"/Users/lingerlove/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-mousemap",
+		"/usr/local/opt/go/libexec/src/os/exec_posix.go",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/numa-utils/proto/numa.proto",
+		"/Users/lingerlove/Library/Application Support/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
+		"/Users/lingerlove/Library/Application Support/Sublime Text 3/Packages/GoSublime/USAGE.md",
+		"/Users/lingerlove/Library/Application Support/Sublime Text 3/Packages/GoSublime/CHANGELOG.md"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"",
+			"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/samples/aliyun/classic",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"inventoryFile",
+			"createInventoryFile",
+			"BuildHostConfigs",
+			"SaveSpec",
+			"spec.json",
+			"createInventoryFile",
+			"ansibleHostFile",
+			"createInventoryFile",
+			"appendSpec",
+			"cmd.Flags().",
+			"ByName",
+			"tmpl",
+			"template.New",
+			"config-contr",
+			"config",
+			"template",
+			"StackTemplateTmplFile",
+			"stack-template",
+			"runDeploy",
+			"util",
+			"CreateIn",
+			".fog",
+			"cmd.Flags().",
+			"1.23",
+			"\"github.com/Sirupsen/logrus\"",
+			"StdLogger",
+			"DecorateRuntimeContext",
+			"func",
+			"Failed to create host",
+			"Failed to create instance",
+			"Create",
+			"Marshal",
+			"fmt.Printf",
+			"log",
+			"and its key is",
+			"bindFormatError",
+			"mount",
+			"softlayer",
+			"MkdirAll",
+			"env",
+			"MustCompile",
+			"\"image\": ",
+			"apiserver_extra_args",
+			"kubelet_options",
+			"--allow-privileged=true",
+			"gcr.io",
+			"http_proxy",
+			"kubelet_options",
+			"python-netaddr",
+			"python-netaddr.noarch",
+			"os.Getwd()",
+			"ansible_pkg_mgr",
+			"download_bin",
+			"localBuildOutput",
+			"add_on",
+			"isDead",
+			"respBody",
+			"dockerClient",
+			"docker",
+			"dockerRun",
+			"this.docker",
+			"AnsibleManager",
+			"ansibleDeployer",
+			"spec.json",
+			"NewFilestore",
+			"ByName",
+			"spec.json",
+			"stat",
+			"os.Getwd()",
+			"myHost",
+			"desireMap",
+			"currenthostMap",
+			"hostMap",
+			"s ",
+			"ByLength",
+			"numRunning",
+			"existMap",
+			"scaleMap",
+			"NewFilestore",
+			"WriteFile",
+			"createSSHKey",
+			"softlayer-image",
+			"softlayer-hostname",
+			"GetSSHHostname",
+			"StringSlice",
+			"NewDriver",
+			"SetConfigFromFlags",
+			"getstate",
+			"SetConfigFromFlags",
+			"StringSlice",
+			"Set",
+			"validateDeviceConfig",
+			"resource",
+			"batch",
+			"addTask",
+			"CreateTask",
+			"NewGlobalOrchestrator",
+			"addTasks",
+			"message service",
+			"message",
+			"ready",
+			"nodeID",
+			"Run",
+			"engine-addr",
+			"go-e",
+			"CreateService",
+			"Create",
+			"service ",
+			"service",
+			".pro",
+			"service",
+			"bounds",
+			"capset",
+			"getData",
+			"Load",
+			"mkStringCap",
+			"Load",
+			"all",
+			"Get",
+			"reserved",
+			"printf",
+			"log.Infof",
+			"createContainer",
+			"cancel",
+			"gofmt",
+			"fmt_cmd"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.9o:///Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cluster/ansible":
+	{
+		"height": 100.0
+	},
+	"output.GoSublime-output":
+	{
+		"height": 350.0
+	},
+	"output.MarGo-output":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "kube.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"retrieve-systemd-files.yml",
+				"roles/master/tasks/retrieve-systemd-files.yml"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 369.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
