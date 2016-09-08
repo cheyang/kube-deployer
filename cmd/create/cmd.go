@@ -9,11 +9,10 @@ import (
 	"path/filepath"
 
 	"github.com/cheyang/fog/cluster"
-	"github.com/cheyang/fog/types"
+	fog "github.com/cheyang/fog/types"
 	"github.com/cheyang/fog/util/yaml"
 	"github.com/cheyang/kube-deployer/helper"
 	"github.com/cheyang/kube-deployer/templates/create"
-	deployer_type "github.com/cheyang/kube-deployer/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -57,7 +56,7 @@ func init() {
 	flags.BoolP("retry", "r", false, "retry to create k8s cluster.")
 }
 
-func parseDeployArgs(cmd *cobra.Command, args []string) (*deployer_type.DeployArguments, error) {
+func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments, error) {
 	viper.BindEnv("key-id", "ALIYUNECS_KEY_ID")
 	viper.BindEnv("key-secret", "ALIYUNECS_KEY_SECRET")
 	viper.BindEnv("image-id", "ALIYUNECS_IMAGE_ID")
@@ -94,12 +93,12 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*deployer_type.DeployAr
 		return nil, err
 	}
 
-	return &deployer_type.DeployArguments{
+	return &types.DeployArguments{
 		KeyID:      viper.GetString("key-id"),
 		KeySecret:  viper.GetString("key-secret"),
 		Region:     viper.GetString("region"),
 		MasterSize: viper.GetString("master-size"),
-		Arguments: deployer_type.Arguments{
+		Arguments: types.Arguments{
 			NumNode:     viper.GetInt("num-nodes"),
 			ImageID:     viper.GetString("image-id"),
 			NodeSize:    viper.GetString("node-size"),
@@ -109,7 +108,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*deployer_type.DeployAr
 
 }
 
-func generateConfigFiles(args *deployer_type.DeploymentArguments) (deployFileName, paramFileName string, err error) {
+func generateConfigFiles(args *types.DeploymentArguments) (deployFileName, paramFileName string, err error) {
 
 	workingDir := filepath.Join(helper.GetRootDir(), args.ClusterName)
 	_, err = os.Stat(workingDir)
@@ -150,7 +149,7 @@ func generateConfigFiles(args *deployer_type.DeploymentArguments) (deployFileNam
 
 func runDeploy(configFile string) error {
 	//read and parse the config file
-	spec := types.Spec{}
+	spec := fog.Spec{}
 	if _, err := os.Stat(configFile); os.IsNotExist(err) {
 		return err
 	}

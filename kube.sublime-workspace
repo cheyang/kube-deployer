@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"slave",
+				"slaveSpec	*types.VMSpec ν"
+			],
+			[
+				"sc",
+				"scaleArgs	*deployer_type.ScaleArguments ν"
+			],
+			[
+				"sla",
+				"slaveSpec	*types.VMSpec ν"
+			],
+			[
+				"lo",
+				"LoadSpec	*types.Spec, error ƒ"
+			],
+			[
+				"m",
+				"MatchString	bool ƒ"
+			],
+			[
+				"n",
+				"NumNode	int ν"
+			],
+			[
+				"dep",
+				"deployInput	*deployer_type.DeploymentArguments ν"
+			],
+			[
+				"ar",
+				"argument	*deployer_type.DeploymentArguments ν"
+			],
+			[
+				"St",
+				"StringP	*string ƒ"
+			],
+			[
 				"ro",
 				"roleMap	map[string]bool ν"
 			],
@@ -144,10 +180,6 @@
 				"ShowStdout	bool ν"
 			],
 			[
-				"dep",
-				"deployer	deploy.Deployer ν"
-			],
-			[
 				"gen",
 				"genEnvsForAnsible	[]string ƒ"
 			],
@@ -218,10 +250,6 @@
 			[
 				"typ",
 				"types	 package ρ"
-			],
-			[
-				"sc",
-				"scaleMap	map[string]int ν"
 			],
 			[
 				"st",
@@ -299,6 +327,112 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "cmd/scale/cmd.go",
+			"settings":
+			{
+				"buffer_size": 2949,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/types/spec.go",
+			"settings":
+			{
+				"buffer_size": 2070,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/persist/store.go",
+			"settings":
+			{
+				"buffer_size": 1348,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/util/util.go",
+			"settings":
+			{
+				"buffer_size": 883,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 924 files for \"match\"\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/cheyang/fog/util/util.go:\n   22  func SetStoreRoot(root string) error {\n   23  	re := regexp.MustCompile(\"^(\\\\w+)$\")\n   24: 	if re.MatchString(root) {\n   25  		storeBase = fmt.Sprintf(\".%s\", root)\n   26  	} else {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/cheyang/fog/util/yaml/decoder.go:\n   43  \n   44  // Decode reads a YAML document as JSON from the stream or returns\n   45: // an error. The decoding rules match json.Unmarshal, not\n   46  // yaml.Unmarshal.\n   47  func (d *YAMLToJSONDecoder) Decode(into interface{}) error {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/cloudfoundry-incubator/candiedyaml/encode.go:\n  268  	s := v.String()\n  269  \n  270: 	if nonPrintable.MatchString(s) {\n  271  		e.emitBase64(tag, v)\n  272  		return\n  ...\n  284  		if tag == \"\" && rtag != yaml_STR_TAG {\n  285  			style = yaml_DOUBLE_QUOTED_SCALAR_STYLE\n  286: 		} else if multiline.MatchString(s) {\n  287  			style = yaml_LITERAL_SCALAR_STYLE\n  288  		} else {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/cloudfoundry-incubator/candiedyaml/resolver.go:\n  315  func resolve_time(val string, v reflect.Value, event yaml_event_t) (string, error) {\n  316  	var parsedTime time.Time\n  317: 	matches := ymd_regexp.FindStringSubmatch(val)\n  318: 	if len(matches) > 0 {\n  319: 		year, _ := strconv.Atoi(matches[1])\n  320: 		month, _ := strconv.Atoi(matches[2])\n  321: 		day, _ := strconv.Atoi(matches[3])\n  322  		parsedTime = time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.UTC)\n  323  	} else {\n  324: 		matches = timestamp_regexp.FindStringSubmatch(val)\n  325: 		if len(matches) == 0 {\n  326  			return \"\", fmt.Errorf(\"Invalid timestamp: '%s' at %s\", val, event.start_mark)\n  327  		}\n  328  \n  329: 		year, _ := strconv.Atoi(matches[1])\n  330: 		month, _ := strconv.Atoi(matches[2])\n  331: 		day, _ := strconv.Atoi(matches[3])\n  332: 		hour, _ := strconv.Atoi(matches[4])\n  333: 		min, _ := strconv.Atoi(matches[5])\n  334: 		sec, _ := strconv.Atoi(matches[6])\n  335  \n  336  		nsec := 0\n  337: 		if matches[7] != \"\" {\n  338: 			millis, _ := strconv.Atoi(matches[7])\n  339  			nsec = int(time.Duration(millis) * time.Millisecond)\n  340  		}\n  341  \n  342  		loc := time.UTC\n  343: 		if matches[8] != \"\" {\n  344: 			sign := matches[8][0]\n  345: 			hr, _ := strconv.Atoi(matches[8][1:])\n  346  			min := 0\n  347: 			if matches[9] != \"\" {\n  348: 				min, _ = strconv.Atoi(matches[9])\n  349  			}\n  350  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/distribution/digest/digest.go:\n   45  }\n   46  \n   47: // DigestRegexp matches valid digest types.\n   48  var DigestRegexp = regexp.MustCompile(`[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+`)\n   49  \n   50: // DigestRegexpAnchored matches valid digest types, anchored to the start and end of the match.\n   51  var DigestRegexpAnchored = regexp.MustCompile(`^` + DigestRegexp.String() + `$`)\n   52  \n   ..\n   86  	s := string(d)\n   87  \n   88: 	if !DigestRegexpAnchored.MatchString(s) {\n   89  		return ErrDigestInvalidFormat\n   90  	}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/distribution/digest/doc.go:\n   29  // interface, provides a common write sink for digest verification. After\n   30  // writing is complete, calling the Verifier.Verified method will indicate\n   31: // whether or not the stream of bytes matches the target digest.\n   32  //\n   33  // Missing Features\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/distribution/digest/set.go:\n    9  \n   10  var (\n   11: 	// ErrDigestNotFound is used when a matching digest\n   12  	// could not be found in a set.\n   13  	ErrDigestNotFound = errors.New(\"digest not found\")\n   14  \n   15  	// ErrDigestAmbiguous is used when multiple digests\n   16: 	// are found in a set. None of the matching digests\n   17: 	// should be considered valid matches.\n   18  	ErrDigestAmbiguous = errors.New(\"ambiguous digest string\")\n   19  )\n   ..\n   41  }\n   42  \n   43: // checkShortMatch checks whether two digests match as either whole\n   44  // values or short values. This function does not test equality,\n   45: // rather whether the second value could match against the first\n   46  // value.\n   47: func checkShortMatch(alg Algorithm, hex, shortAlg, shortHex string) bool {\n   48  	if len(hex) == len(shortHex) {\n   49  		if hex != shortHex {\n   ..\n   61  }\n   62  \n   63: // Lookup looks for a digest matching the given string representation.\n   64  // If no digests could be found ErrDigestNotFound will be returned\n   65: // with an empty digest value. If multiple matches are found\n   66  // ErrDigestAmbiguous will be returned with an empty digest value.\n   67  func (dst *Set) Lookup(d string) (Digest, error) {\n   ..\n   93  	}\n   94  	idx := sort.Search(len(dst.entries), searchFunc)\n   95: 	if idx == len(dst.entries) || !checkShortMatch(dst.entries[idx].alg, dst.entries[idx].val, string(alg), hex) {\n   96  		return \"\", ErrDigestNotFound\n   97  	}\n   ..\n   99  		return dst.entries[idx].digest, nil\n  100  	}\n  101: 	if idx+1 < len(dst.entries) && checkShortMatch(dst.entries[idx+1].alg, dst.entries[idx+1].val, string(alg), hex) {\n  102  		return \"\", ErrDigestAmbiguous\n  103  	}\n  ...\n  200  				short = dst.entries[i].val[:l]\n  201  				for j := i + 1; j < len(dst.entries); j++ {\n  202: 					if checkShortMatch(dst.entries[j].alg, dst.entries[j].val, \"\", short) {\n  203  						if j > resetIdx {\n  204  							resetIdx = j\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/distribution/digest/verifiers.go:\n   13  	io.Writer\n   14  \n   15: 	// Verified will return true if the content written to Verifier matches\n   16  	// the digest.\n   17  	Verified() bool\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/distribution/reference/reference.go:\n  134  func SplitHostname(named Named) (string, string) {\n  135  	name := named.Name()\n  136: 	match := anchoredNameRegexp.FindStringSubmatch(name)\n  137: 	if match == nil || len(match) != 3 {\n  138  		return \"\", name\n  139  	}\n  140: 	return match[1], match[2]\n  141  }\n  142  \n  ...\n  145  // NOTE: Parse will not handle short digests.\n  146  func Parse(s string) (Reference, error) {\n  147: 	matches := ReferenceRegexp.FindStringSubmatch(s)\n  148: 	if matches == nil {\n  149  		if s == \"\" {\n  150  			return nil, ErrNameEmpty\n  ...\n  154  	}\n  155  \n  156: 	if len(matches[1]) > NameTotalLengthMax {\n  157  		return nil, ErrNameTooLong\n  158  	}\n  159  \n  160  	ref := reference{\n  161: 		name: matches[1],\n  162: 		tag:  matches[2],\n  163  	}\n  164: 	if matches[3] != \"\" {\n  165  		var err error\n  166: 		ref.digest, err = digest.ParseDigest(matches[3])\n  167  		if err != nil {\n  168  			return nil, err\n  ...\n  201  		return nil, ErrNameTooLong\n  202  	}\n  203: 	if !anchoredNameRegexp.MatchString(name) {\n  204  		return nil, ErrReferenceInvalidFormat\n  205  	}\n  ...\n  210  // reference incorporating both the name and the tag.\n  211  func WithTag(name Named, tag string) (NamedTagged, error) {\n  212: 	if !anchoredTagRegexp.MatchString(tag) {\n  213  		return nil, ErrTagInvalidFormat\n  214  	}\n  ...\n  222  // a reference incorporating both the name and the digest.\n  223  func WithDigest(name Named, digest digest.Digest) (Canonical, error) {\n  224: 	if !anchoredDigestRegexp.MatchString(digest.String()) {\n  225  		return nil, ErrDigestInvalidFormat\n  226  	}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/distribution/reference/regexp.go:\n    6  	// alphaNumericRegexp defines the alpha numeric atom, typically a\n    7  	// component of names. This only allows lower case characters and digits.\n    8: 	alphaNumericRegexp = match(`[a-z0-9]+`)\n    9  \n   10  	// separatorRegexp defines the separators allowed to be embedded in name\n   11  	// components. This allow one period, one or two underscore and multiple\n   12  	// dashes.\n   13: 	separatorRegexp = match(`(?:[._]|__|[-]*)`)\n   14  \n   15  	// nameComponentRegexp restricts registry path component names to start\n   ..\n   23  	// repository name to start with a component as defined by hostnameRegexp\n   24  	// and followed by an optional port.\n   25: 	hostnameComponentRegexp = match(`(?:[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])`)\n   26  \n   27  	// hostnameRegexp defines the structure of potential hostname components\n   ..\n   32  		hostnameComponentRegexp,\n   33  		optional(repeated(literal(`.`), hostnameComponentRegexp)),\n   34: 		optional(literal(`:`), match(`[0-9]+`)))\n   35  \n   36: 	// TagRegexp matches valid tag names. From docker/docker:graph/tags.go.\n   37: 	TagRegexp = match(`[\\w][\\w.-]{0,127}`)\n   38  \n   39: 	// anchoredTagRegexp matches valid tag names, anchored at the start and\n   40: 	// end of the matched string.\n   41  	anchoredTagRegexp = anchored(TagRegexp)\n   42  \n   43: 	// DigestRegexp matches valid digests.\n   44: 	DigestRegexp = match(`[A-Za-z][A-Za-z0-9]*(?:[-_+.][A-Za-z][A-Za-z0-9]*)*[:][[:xdigit:]]{32,}`)\n   45  \n   46: 	// anchoredDigestRegexp matches valid digests, anchored at the start and\n   47: 	// end of the matched string.\n   48  	anchoredDigestRegexp = anchored(DigestRegexp)\n   49  \n   ..\n   71  )\n   72  \n   73: // match compiles the string to a regular expression.\n   74: var match = regexp.MustCompile\n   75  \n   76  // literal compiles s into a literal regular expression, escaping any regexp\n   77  // reserved characters.\n   78  func literal(s string) *regexp.Regexp {\n   79: 	re := match(regexp.QuoteMeta(s))\n   80  \n   81  	if _, complete := re.LiteralPrefix(); !complete {\n   ..\n   94  	}\n   95  \n   96: 	return match(s)\n   97  }\n   98  \n   ..\n  100  // production optional.\n  101  func optional(res ...*regexp.Regexp) *regexp.Regexp {\n  102: 	return match(group(expression(res...)).String() + `?`)\n  103  }\n  104  \n  105  // repeated wraps the regexp in a non-capturing group to get one or more\n  106: // matches.\n  107  func repeated(res ...*regexp.Regexp) *regexp.Regexp {\n  108: 	return match(group(expression(res...)).String() + `+`)\n  109  }\n  110  \n  111  // group wraps the regexp in a non-capturing group.\n  112  func group(res ...*regexp.Regexp) *regexp.Regexp {\n  113: 	return match(`(?:` + expression(res...).String() + `)`)\n  114  }\n  115  \n  116  // capture wraps the expression in a capturing group.\n  117  func capture(res ...*regexp.Regexp) *regexp.Regexp {\n  118: 	return match(`(` + expression(res...).String() + `)`)\n  119  }\n  120  \n  121  // anchored anchors the regular expression by adding start and end delimiters.\n  122  func anchored(res ...*regexp.Regexp) *regexp.Regexp {\n  123: 	return match(`^` + expression(res...).String() + `$`)\n  124  }\n  125  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/engine-api/client/image_build.go:\n  116  func getDockerOS(serverHeader string) string {\n  117  	var osType string\n  118: 	matches := headerRegexp.FindStringSubmatch(serverHeader)\n  119: 	if len(matches) > 0 {\n  120: 		osType = matches[1]\n  121  	}\n  122  	return osType\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/engine-api/client/image_list.go:\n   22  		query.Set(\"filters\", filterJSON)\n   23  	}\n   24: 	if options.MatchName != \"\" {\n   25  		// FIXME rename this parameter, to not be confused with the filters flag\n   26: 		query.Set(\"filter\", options.MatchName)\n   27  	}\n   28  	if options.All {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/engine-api/types/client.go:\n  182  // ImageListOptions holds parameters to filter the list of images with.\n  183  type ImageListOptions struct {\n  184: 	MatchName string\n  185  	All       bool\n  186  	Filters   filters.Args\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/engine-api/types/seccomp.go:\n   32  )\n   33  \n   34: // Action taken upon Seccomp rule match\n   35  type Action string\n   36  \n   ..\n   44  )\n   45  \n   46: // Operator used to match syscall arguments in Seccomp\n   47  type Operator string\n   48  \n   ..\n   58  )\n   59  \n   60: // Arg used for matching specific syscall arguments in Seccomp\n   61  type Arg struct {\n   62  	Index    uint     `json:\"index\"`\n   ..\n   66  }\n   67  \n   68: // Syscall is used to match a syscall in Seccomp\n   69  type Syscall struct {\n   70  	Name   string `json:\"name\"`\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/engine-api/types/filters/parse.go:\n  153  }\n  154  \n  155: // MatchKVList returns true if the values for the specified field matches the ones\n  156  // from the sources.\n  157  // e.g. given Args are {'label': {'label1=1','label2=1'}, 'image.name', {'ubuntu'}},\n  158  //      field is 'label' and sources are {'label1': '1', 'label2': '2'}\n  159  //      it returns true.\n  160: func (filters Args) MatchKVList(field string, sources map[string]string) bool {\n  161  	fieldValues := filters.fields[field]\n  162  \n  ...\n  170  	}\n  171  \n  172: 	for name2match := range fieldValues {\n  173: 		testKV := strings.SplitN(name2match, \"=\", 2)\n  174  \n  175  		v, ok := sources[testKV[0]]\n  ...\n  185  }\n  186  \n  187: // Match returns true if the values for the specified field matches the source string\n  188  // e.g. given Args are {'label': {'label1=1','label2=1'}, 'image.name', {'ubuntu'}},\n  189  //      field is 'image.name' and source is 'ubuntu'\n  190  //      it returns true.\n  191: func (filters Args) Match(field, source string) bool {\n  192: 	if filters.ExactMatch(field, source) {\n  193  		return true\n  194  	}\n  195  \n  196  	fieldValues := filters.fields[field]\n  197: 	for name2match := range fieldValues {\n  198: 		match, err := regexp.MatchString(name2match, source)\n  199  		if err != nil {\n  200  			continue\n  201  		}\n  202: 		if match {\n  203  			return true\n  204  		}\n  ...\n  207  }\n  208  \n  209: // ExactMatch returns true if the source matches exactly one of the filters.\n  210: func (filters Args) ExactMatch(field, source string) bool {\n  211  	fieldValues, ok := filters.fields[field]\n  212  	//do not filter if there is no filter set or cannot determine filter\n  ...\n  215  	}\n  216  \n  217: 	// try to match full name value to avoid O(N) regular expression matching\n  218  	return fieldValues[source]\n  219  }\n  220  \n  221: // UniqueExactMatch returns true if there is only one filter and the source matches exactly this one.\n  222: func (filters Args) UniqueExactMatch(field, source string) bool {\n  223  	fieldValues := filters.fields[field]\n  224  	//do not filter if there is no filter set or cannot determine filter\n  ...\n  230  	}\n  231  \n  232: 	// try to match full name value to avoid O(N) regular expression matching\n  233  	return fieldValues[source]\n  234  }\n  235  \n  236: // FuzzyMatch returns true if the source matches exactly one of the filters,\n  237  // or the source has one of the filters as a prefix.\n  238: func (filters Args) FuzzyMatch(field, source string) bool {\n  239: 	if filters.ExactMatch(field, source) {\n  240  		return true\n  241  	}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/go-connections/nat/parse.go:\n   17  	)\n   18  	if len(parts) != len(templateParts) {\n   19: 		return nil, fmt.Errorf(\"Invalid format to parse. %s should match template %s\", data, template)\n   20  	}\n   21  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/go-units/size.go:\n   77  // Parses the human-readable size string into the amount it represents.\n   78  func parseSize(sizeStr string, uMap unitMap) (int64, error) {\n   79: 	matches := sizeRegex.FindStringSubmatch(sizeStr)\n   80: 	if len(matches) != 3 {\n   81  		return -1, fmt.Errorf(\"invalid size: '%s'\", sizeStr)\n   82  	}\n   83  \n   84: 	size, err := strconv.ParseInt(matches[1], 10, 0)\n   85  	if err != nil {\n   86  		return -1, err\n   87  	}\n   88  \n   89: 	unitPrefix := strings.ToLower(matches[2])\n   90  	if mul, ok := uMap[unitPrefix]; ok {\n   91  		size *= mul\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/machine/drivers/softlayer/driver.go:\n  376  		// not a perfect regex, but should be just fine for our needs\n  377  		exp := regexp.MustCompile(`\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}`)\n  378: 		if exp.MatchString(ip) {\n  379  			d.IPAddress = ip\n  380  			return ip, nil\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/machine/libmachine/log/log.go:\n   11  	logger = NewFmtMachineLogger()\n   12  \n   13: 	// (?s) enables '.' to match '\\n' -- see https://golang.org/pkg/regexp/syntax/\n   14  	certRegex = regexp.MustCompile(\"(?s)-----BEGIN CERTIFICATE-----.*-----END CERTIFICATE-----\")\n   15  	keyRegex  = regexp.MustCompile(\"(?s)-----BEGIN RSA PRIVATE KEY-----.*-----END RSA PRIVATE KEY-----\")\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/machine/libmachine/mcnutils/b2d.go:\n  160  	}\n  161  \n  162: 	// match github (enterprise) release urls:\n  163  	// https://api.github.com/repos/../../releases or\n  164  	// https://some.github.enterprise/api/v3/repos/../../releases\n  165  	re := regexp.MustCompile(\"(https?)://([^/]+)(/api/v3)?/repos/([^/]+)/([^/]+)/releases\")\n  166: 	matches := re.FindStringSubmatch(apiURL)\n  167: 	if len(matches) != 6 {\n  168: 		// does not match a github releases api URL\n  169  		return apiURL, nil\n  170  	}\n  171  \n  172: 	scheme, host, org, repo := matches[1], matches[2], matches[4], matches[5]\n  173  	if host == \"api.github.com\" {\n  174  		host = \"github.com\"\n  ...\n  454  	}\n  455  \n  456: 	// if ISO is specified, check if it matches a github releases url or fallback to a direct download\n  457  	downloadURL, err := b.getReleaseURL(isoURL)\n  458  	if err != nil {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/machine/libmachine/provision/redhat.go:\n  259  	case \"ol\":\n  260  		packageListInfo.OsRelease = \"oraclelinux\"\n  261: 		v := majorVersionRE.FindStringSubmatch(releaseInfo.Version)\n  262  		if v == nil {\n  263  			return nil, fmt.Errorf(\"unable to determine major version of %s\", releaseInfo.Version)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/docker/machine/libmachine/provision/utils.go:\n  193  }\n  194  \n  195: func matchNetstatOut(reDaemonListening, netstatOut string) bool {\n  196  	// TODO: I would really prefer this be a Scanner directly on\n  197  	// the STDOUT of the executed command than to do all the string\n  198  	// manipulation hokey-pokey.\n  199  	//\n  200: 	// TODO: Unit test this matching.\n  201  	for _, line := range strings.Split(netstatOut, \"\\n\") {\n  202: 		match, err := regexp.MatchString(reDaemonListening, line)\n  203  		if err != nil {\n  204  			log.Warnf(\"Regex warning: %s\", err)\n  205  		}\n  206: 		if match && line != \"\" {\n  207  			return true\n  208  		}\n  ...\n  262  		}\n  263  \n  264: 		return matchNetstatOut(reDaemonListening, netstatOut)\n  265  	}\n  266  }\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/fsnotify/fsnotify/CHANGELOG.md:\n  247  \n  248  * [API] kqueue: return errors during watch instead of sending over channel\n  249: * kqueue: match symlink behavior on Linux\n  250  * inotify: add `DELETE_SELF` (requested by @taralx)\n  251  * [Fix] kqueue: handle EINTR (reported by @robfig)\n  ...\n  269  ## v0.1.0 / 2011-10-19\n  270  \n  271: * kqueue: add watch on file creation to match inotify\n  272  * kqueue: create file event\n  273  * inotify: ignore `IN_IGNORED` events\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/fsnotify/fsnotify/kqueue.go:\n  402  // sendDirectoryEvents searches the directory for newly created files\n  403  // and sends them over the event channel. This functionality is to have\n  404: // the BSD version of fsnotify match Linux inotify which provides a\n  405  // create event for files created in a watched directory.\n  406  func (w *Watcher) sendDirectoryChangeEvents(dirPath string) {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/ghodss/yaml/fields.go:\n  348  // See http://play.golang.org/p/tTxjOc0OGo\n  349  //\n  350: // The returned function is specialized for matching against s and\n  351  // should only be given s. It's not curried for performance reasons.\n  352  func foldFunc(s []byte) func(s, t []byte) bool {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/hashicorp/hcl/decoder.go:\n  604  \n  605  		// Determine the element we'll use to decode. If it is a single\n  606: 		// match (only object with the field), then we decode it exactly.\n  607: 		// If it is a prefix match, then we decode the matches.\n  608  		filter := list.Filter(fieldName)\n  609: 		prefixMatches := filter.Children()\n  610: 		matches := filter.Elem()\n  611: 		if len(matches.Items) == 0 && len(prefixMatches.Items) == 0 {\n  612  			continue\n  613  		}\n  ...\n  619  		// because we actually want the value.\n  620  		fieldName = fmt.Sprintf(\"%s.%s\", name, fieldName)\n  621: 		if len(prefixMatches.Items) > 0 {\n  622: 			if err := d.decode(fieldName, prefixMatches, field); err != nil {\n  623  				return err\n  624  			}\n  625  		}\n  626: 		for _, match := range matches.Items {\n  627: 			var decodeNode ast.Node = match.Val\n  628  			if ot, ok := decodeNode.(*ast.ObjectType); ok {\n  629  				decodeNode = &ast.ObjectList{Items: ot.List.Items}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/hashicorp/hcl/hcl/ast/ast.go:\n   52  // zero-length key lists if they have no children.\n   53  //\n   54: // If no matches are found, an empty ObjectList (non-nil) is returned.\n   55  func (o *ObjectList) Filter(keys ...string) *ObjectList {\n   56  	var result ObjectList\n   ..\n   61  		}\n   62  \n   63: 		match := true\n   64  		for i, key := range item.Keys[:len(keys)] {\n   65  			key := key.Token.Value().(string)\n   66  			if key != keys[i] && !strings.EqualFold(key, keys[i]) {\n   67: 				match = false\n   68  				break\n   69  			}\n   70  		}\n   71: 		if !match {\n   72  			continue\n   73  		}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/hashicorp/hcl/hcl/scanner/scanner.go:\n  450  			// in the identifier, this cannot be a valid terminator.\n  451  			lineBytesLen := s.srcPos.Offset - s.lastCharLen - lineStart\n  452: 			if lineBytesLen >= len(identBytes) && identRegexp.Match(s.src[lineStart:s.srcPos.Offset-s.lastCharLen]) {\n  453  				break\n  454  			}\n  455  \n  456: 			// Not an anchor match, record the start of a new line\n  457  			lineStart = s.srcPos.Offset\n  458  		}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/hashicorp/hcl/json/parser/flatten.go:\n   57  	}\n   58  \n   59: 	// Great! We have a match go through all the items and flatten\n   60  	for _, elem := range ot.List {\n   61  		// Add it to the frontier so that we can recurse\n   ..\n   91  	}\n   92  \n   93: 	// Great! We have a match go through all the items and flatten\n   94  	for _, subitem := range ot.List.Items {\n   95  		// Copy the new key\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/magiconair/properties/properties.go:\n  429  \n  430  // Filter returns a new properties object which contains all properties\n  431: // for which the key matches the pattern.\n  432  func (p *Properties) Filter(pattern string) (*Properties, error) {\n  433  	re, err := regexp.Compile(pattern)\n  ...\n  440  \n  441  // FilterRegexp returns a new properties object which contains all properties\n  442: // for which the key matches the regular expression.\n  443  func (p *Properties) FilterRegexp(re *regexp.Regexp) *Properties {\n  444  	pp := NewProperties()\n  445  	for _, k := range p.k {\n  446: 		if re.MatchString(k) {\n  447  			pp.Set(k, p.m[k])\n  448  		}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/Microsoft/go-winio/pipe.go:\n   48  var (\n   49  	// ErrPipeListenerClosed is returned for pipe operations on listeners that have been closed.\n   50: 	// This error should match net.errClosing since docker takes a dependency on its text.\n   51  	ErrPipeListenerClosed = errors.New(\"use of closed network connection\")\n   52  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/mitchellh/mapstructure/mapstructure.go:\n   85  \n   86  	// Unused is a slice of keys that were found in the raw value but\n   87: 	// weren't decoded since there was no matching field in the result interface\n   88  	Unused []string\n   89  }\n   ..\n  628  \n  629  			if !rawMapVal.IsValid() {\n  630: 				// There was no matching key in the map for the value in\n  631  				// the struct. Just ignore.\n  632  				continue\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/opencontainers/runc/libcontainer/user/lookup.go:\n    9  	// The current operating system does not provide the required data for user lookups.\n   10  	ErrUnsupported = errors.New(\"user lookup: operating system does not provide passwd-formatted data\")\n   11: 	// No matching entries found in file.\n   12: 	ErrNoPasswdEntries = errors.New(\"no matching entries in passwd file\")\n   13: 	ErrNoGroupEntries  = errors.New(\"no matching entries in group file\")\n   14  )\n   15  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/opencontainers/runc/libcontainer/user/user.go:\n  265  	gidArg, gidErr := strconv.Atoi(groupArg)\n  266  \n  267: 	// Find the matching user.\n  268  	users, err := ParsePasswdFilter(passwd, func(u User) bool {\n  269  		if userArg == \"\" {\n  ...\n  288  	}\n  289  \n  290: 	var matchedUserName string\n  291  	if len(users) > 0 {\n  292: 		// First match wins, even if there's more than one matching entry.\n  293: 		matchedUserName = users[0].Name\n  294  		user.Uid = users[0].Uid\n  295  		user.Gid = users[0].Gid\n  ...\n  313  	}\n  314  \n  315: 	// On to the groups. If we matched a username, we need to do this because of\n  316  	// the supplementary group IDs.\n  317: 	if groupArg != \"\" || matchedUserName != \"\" {\n  318  		groups, err := ParseGroupFilter(group, func(g Group) bool {\n  319  			// If the group argument isn't explicit, we'll just search for it.\n  ...\n  321  				// Check if user is a member of this group.\n  322  				for _, u := range g.List {\n  323: 					if u == matchedUserName {\n  324  						return true\n  325  					}\n  ...\n  336  		})\n  337  		if err != nil && group != nil {\n  338: 			return nil, fmt.Errorf(\"unable to find groups for spec %v: %v\", matchedUserName, err)\n  339  		}\n  340  \n  ...\n  342  		if groupArg != \"\" {\n  343  			if len(groups) > 0 {\n  344: 				// First match wins, even if there's more than one matching entry.\n  345  				user.Gid = groups[0].Gid\n  346  			} else if groupArg != \"\" {\n  ...\n  399  		var found bool\n  400  		for _, g := range groups {\n  401: 			// if we found a matched group either by name or gid, take the\n  402: 			// first matched as correct\n  403  			if g.Name == ag || strconv.Itoa(g.Gid) == ag {\n  404  				if _, ok := gidMap[g.Gid]; !ok {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/pelletier/go-toml/doc.go:\n   99  // err is nil if any parsing exception occurs.\n  100  //\n  101: // If no node in the tree matches the query, result will simply contain an empty list of\n  102  // items.\n  103  //\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/pelletier/go-toml/keysparsing.go:\n   63  	}\n   64  	if inQuotes {\n   65: 		return nil, fmt.Errorf(\"mismatched quotes\")\n   66  	}\n   67  	if escapeNext {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/pelletier/go-toml/lexer.go:\n  221  \n  222  		possibleDate := string(l.input.Peek(35))\n  223: 		dateMatch := dateRegexp.FindString(possibleDate)\n  224: 		if dateMatch != \"\" {\n  225: 			l.fastForward(len(dateMatch))\n  226  			return l.lexDate\n  227  		}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/pelletier/go-toml/match.go:\n   23  }\n   24  \n   25: // base match\n   26: type matchBase struct {\n   27  	next pathFn\n   28  }\n   29  \n   30: func (f *matchBase) setNext(next pathFn) {\n   31  	f.next = next\n   32  }\n   ..\n   57  }\n   58  \n   59: // match single key\n   60: type matchKeyFn struct {\n   61: 	matchBase\n   62  	Name string\n   63  }\n   64  \n   65: func newMatchKeyFn(name string) *matchKeyFn {\n   66: 	return &matchKeyFn{Name: name}\n   67  }\n   68  \n   69: func (f *matchKeyFn) call(node interface{}, ctx *queryContext) {\n   70  	if array, ok := node.([]*TomlTree); ok {\n   71  		for _, tree := range array {\n   ..\n   83  }\n   84  \n   85: // match single index\n   86: type matchIndexFn struct {\n   87: 	matchBase\n   88  	Idx int\n   89  }\n   90  \n   91: func newMatchIndexFn(idx int) *matchIndexFn {\n   92: 	return &matchIndexFn{Idx: idx}\n   93  }\n   94  \n   95: func (f *matchIndexFn) call(node interface{}, ctx *queryContext) {\n   96  	if arr, ok := tomlValueCheck(node, ctx).([]interface{}); ok {\n   97  		if f.Idx < len(arr) && f.Idx >= 0 {\n   ..\n  102  \n  103  // filter by slicing\n  104: type matchSliceFn struct {\n  105: 	matchBase\n  106  	Start, End, Step int\n  107  }\n  108  \n  109: func newMatchSliceFn(start, end, step int) *matchSliceFn {\n  110: 	return &matchSliceFn{Start: start, End: end, Step: step}\n  111  }\n  112  \n  113: func (f *matchSliceFn) call(node interface{}, ctx *queryContext) {\n  114  	if arr, ok := tomlValueCheck(node, ctx).([]interface{}); ok {\n  115  		// adjust indexes for negative values, reverse ordering\n  ...\n  131  }\n  132  \n  133: // match anything\n  134: type matchAnyFn struct {\n  135: 	matchBase\n  136  }\n  137  \n  138: func newMatchAnyFn() *matchAnyFn {\n  139: 	return &matchAnyFn{}\n  140  }\n  141  \n  142: func (f *matchAnyFn) call(node interface{}, ctx *queryContext) {\n  143  	if tree, ok := node.(*TomlTree); ok {\n  144  		for _, v := range tree.values {\n  ...\n  149  \n  150  // filter through union\n  151: type matchUnionFn struct {\n  152  	Union []pathFn\n  153  }\n  154  \n  155: func (f *matchUnionFn) setNext(next pathFn) {\n  156  	for _, fn := range f.Union {\n  157  		fn.setNext(next)\n  ...\n  159  }\n  160  \n  161: func (f *matchUnionFn) call(node interface{}, ctx *queryContext) {\n  162  	for _, fn := range f.Union {\n  163  		fn.call(node, ctx)\n  ...\n  165  }\n  166  \n  167: // match every single last node in the tree\n  168: type matchRecursiveFn struct {\n  169: 	matchBase\n  170  }\n  171  \n  172: func newMatchRecursiveFn() *matchRecursiveFn {\n  173: 	return &matchRecursiveFn{}\n  174  }\n  175  \n  176: func (f *matchRecursiveFn) call(node interface{}, ctx *queryContext) {\n  177  	if tree, ok := node.(*TomlTree); ok {\n  178  		var visit func(tree *TomlTree)\n  ...\n  195  }\n  196  \n  197: // match based on an externally provided functional filter\n  198: type matchFilterFn struct {\n  199: 	matchBase\n  200  	Pos  Position\n  201  	Name string\n  202  }\n  203  \n  204: func newMatchFilterFn(name string, pos Position) *matchFilterFn {\n  205: 	return &matchFilterFn{Name: name, Pos: pos}\n  206  }\n  207  \n  208: func (f *matchFilterFn) call(node interface{}, ctx *queryContext) {\n  209  	fn, ok := (*ctx.filters)[f.Name]\n  210  	if !ok {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/pelletier/go-toml/parser.go:\n  224  \n  225  func cleanupNumberToken(value string) (string, error) {\n  226: 	if numberUnderscoreInvalidRegexp.MatchString(value) {\n  227  		return \"\", fmt.Errorf(\"invalid use of _ in number\")\n  228  	}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/pelletier/go-toml/query.go:\n   90  \n   91  // CompileQuery compiles a TOML path expression.  The returned Query can be used\n   92: // to match elements within a TomlTree and its descendants.\n   93  func CompileQuery(path string) (*Query, error) {\n   94  	return parseQuery(lexQuery(path))\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/pelletier/go-toml/queryparser.go:\n   98  	}\n   99  \n  100: 	return p.parseMatchExpr\n  101  }\n  102  \n  103  // handle '.' prefix, '[]', and '..'\n  104: func (p *queryParser) parseMatchExpr() queryParserStateFn {\n  105  	tok := p.getToken()\n  106  	switch tok.typ {\n  107  	case tokenDotDot:\n  108: 		p.query.appendPath(&matchRecursiveFn{})\n  109  		// nested parse for '..'\n  110  		tok := p.getToken()\n  111  		switch tok.typ {\n  112  		case tokenKey:\n  113: 			p.query.appendPath(newMatchKeyFn(tok.val))\n  114: 			return p.parseMatchExpr\n  115  		case tokenLeftBracket:\n  116  			return p.parseBracketExpr\n  117  		case tokenStar:\n  118  			// do nothing - the recursive predicate is enough\n  119: 			return p.parseMatchExpr\n  120  		}\n  121  \n  ...\n  125  		switch tok.typ {\n  126  		case tokenKey:\n  127: 			p.query.appendPath(newMatchKeyFn(tok.val))\n  128: 			return p.parseMatchExpr\n  129  		case tokenStar:\n  130: 			p.query.appendPath(&matchAnyFn{})\n  131: 			return p.parseMatchExpr\n  132  		}\n  133  \n  ...\n  138  		return nil // allow EOF at this stage\n  139  	}\n  140: 	return p.parseError(tok, \"expected match expression\")\n  141  }\n  142  \n  ...\n  179  		switch tok.typ {\n  180  		case tokenInteger:\n  181: 			p.union = append(p.union, newMatchIndexFn(tok.Int()))\n  182  		case tokenKey:\n  183: 			p.union = append(p.union, newMatchKeyFn(tok.val))\n  184  		case tokenString:\n  185: 			p.union = append(p.union, newMatchKeyFn(tok.val))\n  186  		case tokenQuestion:\n  187  			return p.parseFilterExpr\n  ...\n  195  		p.query.appendPath(p.union[0])\n  196  	} else {\n  197: 		p.query.appendPath(&matchUnionFn{p.union})\n  198  	}\n  199  \n  200  	p.union = nil // clear out state\n  201: 	return p.parseMatchExpr\n  202  }\n  203  \n  ...\n  223  	}\n  224  	if tok.typ == tokenRightBracket {\n  225: 		p.query.appendPath(newMatchSliceFn(start, end, step))\n  226: 		return p.parseMatchExpr\n  227  	}\n  228  	if tok.typ != tokenColon {\n  ...\n  243  	}\n  244  \n  245: 	p.query.appendPath(newMatchSliceFn(start, end, step))\n  246: 	return p.parseMatchExpr\n  247  }\n  248  \n  ...\n  261  		return p.parseError(tok, \"expected right-parenthesis for filter expression\")\n  262  	}\n  263: 	p.union = append(p.union, newMatchFilterFn(name, tok.Position))\n  264  	return p.parseUnionExpr\n  265  }\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/pkg/sftp/sftp.go:\n   74  	ssh_FX_OWNER_INVALID               = 29\n   75  	ssh_FX_GROUP_INVALID               = 30\n   76: 	ssh_FX_NO_MATCHING_BYTE_RANGE_LOCK = 31\n   77  )\n   78  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/rackspace/gophercloud/CONTRIBUTING.md:\n   86  \n   87  `AssertEquals` and `AssertNoErr` will throw a fatal error if a value does not\n   88: match an expected value or if an error has been declared, respectively. You can\n   89  also use `CheckEquals` and `CheckNoErr` for the same purpose; the only difference\n   90  being that `t.Errorf` is raised rather than `t.Fatalf`.\n   ..\n  169  ```\n  170  \n  171: To run tests that match certain [build tags]():\n  172  \n  173  ```bash\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/rackspace/gophercloud/endpoint_search.go:\n    4  \n    5  var (\n    6: 	// ErrServiceNotFound is returned when no service in a service catalog matches\n    7  	// the provided EndpointOpts. This is generally returned by provider service\n    8  	// factory methods like \"NewComputeV2()\" and can mean that a service is not\n    .\n   10  	ErrServiceNotFound = errors.New(\"No suitable service could be found in the service catalog.\")\n   11  \n   12: 	// ErrEndpointNotFound is returned when no available endpoints match the\n   13  	// provided EndpointOpts. This is also generally returned by provider service\n   14  	// factory methods, and usually indicates that a region was specified\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/rackspace/gophercloud/openstack/endpoint_location.go:\n   11  // V2EndpointURL discovers the endpoint URL for a specific service from a ServiceCatalog acquired\n   12  // during the v2 identity service. The specified EndpointOpts are used to identify a unique,\n   13: // unambiguous endpoint to return. It's an error both when multiple endpoints match the provided\n   14  // criteria and when none do. The minimum that can be specified is a Type, but you will also often\n   15  // need to specify a Name and/or a Region depending on what's available on your OpenStack\n   16  // deployment.\n   17  func V2EndpointURL(catalog *tokens2.ServiceCatalog, opts gophercloud.EndpointOpts) (string, error) {\n   18: 	// Extract Endpoints from the catalog entries that match the requested Type, Name if provided, and Region if provided.\n   19  	var endpoints = make([]tokens2.Endpoint, 0, 1)\n   20  	for _, entry := range catalog.Entries {\n   ..\n   30  	// Report an error if the options were ambiguous.\n   31  	if len(endpoints) > 1 {\n   32: 		return \"\", fmt.Errorf(\"Discovered %d matching endpoints: %#v\", len(endpoints), endpoints)\n   33  	}\n   34  \n   35: 	// Extract the appropriate URL from the matching Endpoint.\n   36  	for _, endpoint := range endpoints {\n   37  		switch opts.Availability {\n   ..\n   47  	}\n   48  \n   49: 	// Report an error if there were no matching endpoints.\n   50  	return \"\", gophercloud.ErrEndpointNotFound\n   51  }\n   ..\n   53  // V3EndpointURL discovers the endpoint URL for a specific service from a Catalog acquired\n   54  // during the v3 identity service. The specified EndpointOpts are used to identify a unique,\n   55: // unambiguous endpoint to return. It's an error both when multiple endpoints match the provided\n   56  // criteria and when none do. The minimum that can be specified is a Type, but you will also often\n   57  // need to specify a Name and/or a Region depending on what's available on your OpenStack\n   58  // deployment.\n   59  func V3EndpointURL(catalog *tokens3.ServiceCatalog, opts gophercloud.EndpointOpts) (string, error) {\n   60: 	// Extract Endpoints from the catalog entries that match the requested Type, Interface,\n   61  	// Name if provided, and Region if provided.\n   62  	var endpoints = make([]tokens3.Endpoint, 0, 1)\n   ..\n   79  	// Report an error if the options were ambiguous.\n   80  	if len(endpoints) > 1 {\n   81: 		return \"\", fmt.Errorf(\"Discovered %d matching endpoints: %#v\", len(endpoints), endpoints)\n   82  	}\n   83  \n   84: 	// Extract the URL from the matching Endpoint.\n   85  	for _, endpoint := range endpoints {\n   86  		return gophercloud.NormalizeURL(endpoint.URL), nil\n   87  	}\n   88  \n   89: 	// Report an error if there were no matching endpoints.\n   90  	return \"\", gophercloud.ErrEndpointNotFound\n   91  }\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/rackspace/gophercloud/openstack/compute/v2/servers/requests.go:\n   31  \n   32  	// Name of the server as a string; can be queried with regular expressions.\n   33: 	// Realize that ?name=bob returns both bob and bobb. If you need to match bob\n   34: 	// only, you can use a regular expression matching the syntax of the\n   35  	// underlying database server implemented for Compute.\n   36  	Name string `q:\"name\"`\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/rackspace/gophercloud/openstack/identity/v3/tokens/results.go:\n    9  \n   10  // Endpoint represents a single API endpoint offered by a service.\n   11: // It matches either a public, internal or admin URL.\n   12  // If supported, it contains a region specifier, again if provided.\n   13  // The significance of the Region field will depend upon your provider.\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/rackspace/gophercloud/openstack/utils/choose_version.go:\n   52  	identityEndpoint := normalize(client.IdentityEndpoint)\n   53  \n   54: 	// If a full endpoint is specified, check version suffixes for a match first.\n   55  	for _, v := range recognized {\n   56  		if strings.HasSuffix(identityEndpoint, v.Suffix) {\n   ..\n   85  		}\n   86  \n   87: 		if matching, ok := byID[value.ID]; ok {\n   88: 			// Prefer a version that exactly matches the provided endpoint.\n   89  			if href == identityEndpoint {\n   90  				if href == \"\" {\n   91  					return nil, \"\", fmt.Errorf(\"Endpoint missing in version %s response from %s\", value.ID, client.IdentityBase)\n   92  				}\n   93: 				return matching, href, nil\n   94  			}\n   95  \n   96  			// Otherwise, find the highest-priority version with a whitelisted status.\n   97  			if goodStatus[strings.ToLower(value.Status)] {\n   98: 				if highest == nil || matching.Priority > highest.Priority {\n   99: 					highest = matching\n  100  					endpoint = href\n  101  				}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/rackspace/gophercloud/testhelper/http_responses.go:\n   55  }\n   56  \n   57: // TestHeader checks that the header on the http.Request matches the expected value.\n   58  func TestHeader(t *testing.T, r *http.Request, header string, expected string) {\n   59  	if actual := r.Header.Get(header); expected != actual {\n   ..\n   62  }\n   63  \n   64: // TestBody verifies that the request body matches an expected body.\n   65  func TestBody(t *testing.T, r *http.Request, expected string) {\n   66  	b, err := ioutil.ReadAll(r.Body)\n   ..\n   74  }\n   75  \n   76: // TestJSONRequest verifies that the JSON payload of a request matches an expected structure, without asserting things about\n   77  // whitespace or ordering.\n   78  func TestJSONRequest(t *testing.T, r *http.Request, expected string) {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/spf13/afero/README.md:\n  280  # RegexpFs\n  281  \n  282: A filtered view on file names, any file NOT matching\n  283  the passed regexp will be treated as non-existing.\n  284: Files not matching the regexp provided will not be created.\n  285  Directories are not filtered.\n  286  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/spf13/afero/regexpfs.go:\n    9  \n   10  // The RegexpFs filters files (not directories) by regular expression. Only\n   11: // files matching the given regexp will be allowed, all others get a ENOENT error (\n   12  // \"No such file or directory\").\n   13  //\n   ..\n   26  }\n   27  \n   28: func (r *RegexpFs) matchesName(name string) error {\n   29  	if r.re == nil {\n   30  		return nil\n   31  	}\n   32: 	if r.re.MatchString(name) {\n   33  		return nil\n   34  	}\n   ..\n   36  }\n   37  \n   38: func (r *RegexpFs) dirOrMatches(name string) error {\n   39  	dir, err := IsDir(r.source, name)\n   40  	if err != nil {\n   ..\n   44  		return nil\n   45  	}\n   46: 	return r.matchesName(name)\n   47  }\n   48  \n   49  func (r *RegexpFs) Chtimes(name string, a, m time.Time) error {\n   50: 	if err := r.dirOrMatches(name); err != nil {\n   51  		return err\n   52  	}\n   ..\n   55  \n   56  func (r *RegexpFs) Chmod(name string, mode os.FileMode) error {\n   57: 	if err := r.dirOrMatches(name); err != nil {\n   58  		return err\n   59  	}\n   ..\n   66  \n   67  func (r *RegexpFs) Stat(name string) (os.FileInfo, error) {\n   68: 	if err := r.dirOrMatches(name); err != nil {\n   69  		return nil, err\n   70  	}\n   ..\n   80  		return nil\n   81  	}\n   82: 	if err := r.matchesName(oldname); err != nil {\n   83  		return err\n   84  	}\n   85: 	if err := r.matchesName(newname); err != nil {\n   86  		return err\n   87  	}\n   ..\n   95  	}\n   96  	if !dir {\n   97: 		if err := r.matchesName(p); err != nil {\n   98  			return err\n   99  		}\n  ...\n  103  \n  104  func (r *RegexpFs) Remove(name string) error {\n  105: 	if err := r.dirOrMatches(name); err != nil {\n  106  		return err\n  107  	}\n  ...\n  110  \n  111  func (r *RegexpFs) OpenFile(name string, flag int, perm os.FileMode) (File, error) {\n  112: 	if err := r.dirOrMatches(name); err != nil {\n  113  		return nil, err\n  114  	}\n  ...\n  122  	}\n  123  	if !dir {\n  124: 		if err := r.matchesName(name); err != nil {\n  125  			return nil, err\n  126  		}\n  ...\n  139  \n  140  func (r *RegexpFs) Create(name string) (File, error) {\n  141: 	if err := r.matchesName(name); err != nil {\n  142  		return nil, err\n  143  	}\n  ...\n  180  	}\n  181  	for _, i := range rfi {\n  182: 		if i.IsDir() || f.re.MatchString(i.Name()) {\n  183  			fi = append(fi, i)\n  184  		}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/spf13/afero/util.go:\n  231  		} else {\n  232  			if i != 2 {\n  233: 				// shift left to catch overlapping matches\n  234  				copy(buff[:], buff[halflen:])\n  235  			}\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/spf13/cast/README.md:\n   41  the To_____ methods, plus an additional error which tells you if it successfully\n   42  converted. Using these methods you can tell the difference between when the\n   43: input matched the zero value or when the conversion failed and the zero value\n   44  was returned.\n   45  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/spf13/cobra/cobra.go:\n   38  var initializers []func()\n   39  \n   40: // automatic prefix matching can be a dangerous thing to automatically enable in CLI tools.\n   41  // Set this to true to enable it\n   42: var EnablePrefixMatching = false\n   43  \n   44  //EnableCommandSorting controls sorting of the slice of commands, which is turned on by default.\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/spf13/cobra/command.go:\n  430  		}\n  431  		nextSubCmd := argsWOflags[0]\n  432: 		matches := make([]*Command, 0)\n  433  		for _, cmd := range c.commands {\n  434: 			if cmd.Name() == nextSubCmd || cmd.HasAlias(nextSubCmd) { // exact name or alias match\n  435  				return innerfind(cmd, argsMinusFirstX(innerArgs, nextSubCmd))\n  436  			}\n  437: 			if EnablePrefixMatching {\n  438: 				if strings.HasPrefix(cmd.Name(), nextSubCmd) { // prefix match\n  439: 					matches = append(matches, cmd)\n  440  				}\n  441  				for _, x := range cmd.Aliases {\n  442  					if strings.HasPrefix(x, nextSubCmd) {\n  443: 						matches = append(matches, cmd)\n  444  					}\n  445  				}\n  ...\n  447  		}\n  448  \n  449: 		// only accept a single prefix match - multiple matches would be ambiguous\n  450: 		if len(matches) == 1 {\n  451: 			return innerfind(matches[0], argsMinusFirstX(innerArgs, argsWOflags[0]))\n  452  		}\n  453  \n  ...\n  643  \n  644  // Call execute to use the args (os.Args[1:] by default)\n  645: // and run through the command tree finding appropriate matches\n  646  // for commands and then corresponding flags.\n  647  func (c *Command) Execute() error {\n  ...\n 1179  }\n 1180  \n 1181: // Flag climbs up the command tree looking for matching flag\n 1182  func (c *Command) Flag(name string) (flag *flag.Flag) {\n 1183  	flag = c.Flags().Lookup(name)\n ....\n 1190  }\n 1191  \n 1192: // recursively find matching persistent flag\n 1193  func (c *Command) persistentFlag(name string) (flag *flag.Flag) {\n 1194  	if c.HasPersistentFlags() {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/spf13/cobra/README.md:\n  793  ```\n  794  \n  795: Suggestions are automatic based on every subcommand registered and use an implementation of [Levenshtein distance](http://en.wikipedia.org/wiki/Levenshtein_distance). Every registered command that matches a minimum distance of 2 (ignoring case) will be displayed as a suggestion.\n  796  \n  797  If you need to disable suggestions or tweak the string distance in your command, use:\n  ...\n  846    * flags can appears anywhere in the args (provided they are unambiguous)\n  847    * --help prints usage screen for app or command\n  848:   * Prefix matching for commands\n  849    * Cleaner looking help and usage output\n  850    * Extensive test suite\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/spf13/jwalterweatherman/thatswhyyoualwaysleaveanote.go:\n  163  }\n  164  \n  165: // Establishes a threshold where anything matching or above will be logged\n  166  func SetLogThreshold(level Level) {\n  167  	logThreshold = levelCheck(level)\n  ...\n  169  }\n  170  \n  171: // Establishes a threshold where anything matching or above will be output\n  172  func SetStdoutThreshold(level Level) {\n  173  	outputThreshold = levelCheck(level)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/spf13/viper/README.md:\n  198  second is the name of the environment variable. The name of the environment\n  199  variable is case sensitive. If the ENV variable name is not provided, then\n  200: Viper will automatically assume that the key name matches the ENV variable name,\n  201  but the ENV variable is IN ALL CAPS. When you explicitly provide the ENV\n  202  variable name, it **does not** automatically add the prefix.\n  ...\n  209  `SetEnvPrefix`. When called, Viper will check for an environment variable any\n  210  time a `viper.Get` request is made. It will apply the following rules. It will\n  211: check for a environment variable with a name matching the key uppercased and\n  212  prefixed with the `EnvPrefix` if set.\n  213  \n  ...\n  470  the remaining registries looking for it.\n  471  \n  472: Lastly, if there exists a key that matches the delimited key path, its value\n  473  will be returned instead. E.g.\n  474  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/github.com/spf13/viper/viper.go:\n  716  // Binds a Viper key to a ENV variable\n  717  // ENV variables are case sensitive\n  718: // If only a key is provided, it will use the env key matching the key, uppercased.\n  719  // EnvPrefix will be used when set when env name is not provided.\n  720  func BindEnv(input ...string) (err error) { return v.BindEnv(input...) }\n  ...\n  853  // SetEnvKeyReplacer sets the strings.Replacer on the viper object\n  854  // Useful for mapping an environmental variable to a key that does\n  855: // not match it.\n  856  func SetEnvKeyReplacer(r *strings.Replacer) { v.SetEnvKeyReplacer(r) }\n  857  func (v *Viper) SetEnvKeyReplacer(r *strings.Replacer) {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/crypto/ssh/certs.go:\n  222  // NewCertSigner returns a Signer that signs with the given Certificate, whose\n  223  // private key is held by signer. It returns an error if the public key in cert\n  224: // doesn't match the key used by signer.\n  225  func NewCertSigner(cert *Certificate, signer Signer) (Signer, error) {\n  226  	if bytes.Compare(cert.Key.Marshal(), signer.PublicKey().Marshal()) != 0 {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/crypto/ssh/client.go:\n  136  func (c *Client) handleGlobalRequests(incoming <-chan *Request) {\n  137  	for r := range incoming {\n  138: 		// This handles keepalive messages and matches\n  139  		// the behaviour of OpenSSH.\n  140  		r.Reply(false, nil)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/crypto/ssh/common.go:\n   76  \n   77  // unexpectedMessageError results when the SSH message that we received didn't\n   78: // match what we wanted.\n   79  func unexpectedMessageError(expected, got uint8) error {\n   80  	return fmt.Errorf(\"ssh: unexpected message type %d (expected %d)\", got, expected)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/crypto/ssh/kex.go:\n   41  	Signature []byte\n   42  \n   43: 	// A cryptographic hash function that matches the security\n   44  	// level of the key exchange algorithm. It is used for\n   45  	// calculating H, and for deriving keys from H and K.\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/crypto/ssh/keys.go:\n  136  		}\n  137  		if i == len(in) {\n  138: 			// Invalid line: unmatched quote\n  139  			in = rest\n  140  			continue\n  ...\n  386  }\n  387  \n  388: // ecHash returns the hash to match the given elliptic curve, see RFC\n  389  // 5656, section 6.2.1\n  390  func ecHash(curve elliptic.Curve) crypto.Hash {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/crypto/ssh/server.go:\n  240  func checkSourceAddress(addr net.Addr, sourceAddr string) error {\n  241  	if addr == nil {\n  242: 		return errors.New(\"ssh: no address known for client, but source-address match required\")\n  243  	}\n  244  \n  245  	tcpAddr, ok := addr.(*net.TCPAddr)\n  246  	if !ok {\n  247: 		return fmt.Errorf(\"ssh: remote address %v is not an TCP address when checking source-address match\", addr)\n  248  	}\n  249  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/crypto/ssh/session.go:\n  419  			wm.lang = sigval.Lang\n  420  		default:\n  421: 			// This handles keepalives and matches\n  422  			// OpenSSH's behaviour.\n  423  			if msg.WantReply {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/net/proxy/per_host.go:\n   11  \n   12  // A PerHost directs connections to a default Dialer unless the hostname\n   13: // requested matches one of a number of exceptions.\n   14  type PerHost struct {\n   15  	def, bypass Dialer\n   ..\n   22  \n   23  // NewPerHost returns a PerHost Dialer that directs connections to either\n   24: // defaultDialer or bypass, depending on whether the connection matches one of\n   25  // the configured rules.\n   26  func NewPerHost(defaultDialer, bypass Dialer) *PerHost {\n   ..\n   62  		}\n   63  		if host == zone[1:] {\n   64: 			// For a zone \"example.com\", we match \"example.com\"\n   65  			// too.\n   66  			return p.bypass\n   ..\n  108  // AddIP specifies an IP address that will use the bypass proxy. Note that\n  109  // this will only take effect if a literal IP address is dialed. A connection\n  110: // to a named host will never match an IP.\n  111  func (p *PerHost) AddIP(ip net.IP) {\n  112  	p.bypassIPs = append(p.bypassIPs, ip)\n  ...\n  115  // AddNetwork specifies an IP range that will use the bypass proxy. Note that\n  116  // this will only take effect if a literal IP address is dialed. A connection\n  117: // to a named host will never match.\n  118  func (p *PerHost) AddNetwork(net *net.IPNet) {\n  119  	p.bypassNetworks = append(p.bypassNetworks, net)\n  ...\n  121  \n  122  // AddZone specifies a DNS suffix that will use the bypass proxy. A zone of\n  123: // \"example.com\" matches \"example.com\" and all of its subdomains.\n  124  func (p *PerHost) AddZone(zone string) {\n  125  	if strings.HasSuffix(zone, \".\") {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/net/proxy/proxy.go:\n   83  	}\n   84  \n   85: 	// If the scheme doesn't match any of the built-in schemes, see if it\n   86  	// was registered by another package.\n   87  	if proxySchemes != nil {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/flock_linux_32bit.go:\n    8  \n    9  func init() {\n   10: 	// On 32-bit Linux systems, the fcntl syscall that matches Go's\n   11  	// Flock_t type is SYS_FCNTL64, not SYS_FCNTL.\n   12  	fcntl64Syscall = SYS_FCNTL64\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/syscall_linux.go:\n  899  // issue 1435.\n  900  // On linux Setuid and Setgid only affects the current thread, not the process.\n  901: // This does not match what most callers expect so we must return an error\n  902  // here rather than letting the caller think that the call succeeded.\n  903  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_darwin_386.go:\n  254  	DLT_LOOP                          = 0x6c\n  255  	DLT_LTALK                         = 0x72\n  256: 	DLT_MATCHING_MAX                  = 0xf5\n  257: 	DLT_MATCHING_MIN                  = 0x68\n  258  	DLT_MFR                           = 0xb6\n  259  	DLT_MOST                          = 0xd3\n  ...\n 1369  	EPROCLIM        = syscall.Errno(0x43)\n 1370  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1371: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1372  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1373  	EPROTO          = syscall.Errno(0x64)\n ....\n 1379  	EREMOTE         = syscall.Errno(0x47)\n 1380  	EROFS           = syscall.Errno(0x1e)\n 1381: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1382  	ESHLIBVERS      = syscall.Errno(0x57)\n 1383  	ESHUTDOWN       = syscall.Errno(0x3a)\n ....\n 1519  	85:  \"bad executable (or shared library)\",\n 1520  	86:  \"bad CPU type in executable\",\n 1521: 	87:  \"shared library version mismatch\",\n 1522  	88:  \"malformed Mach-o file\",\n 1523  	89:  \"operation canceled\",\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_darwin_amd64.go:\n  254  	DLT_LOOP                          = 0x6c\n  255  	DLT_LTALK                         = 0x72\n  256: 	DLT_MATCHING_MAX                  = 0xf5\n  257: 	DLT_MATCHING_MIN                  = 0x68\n  258  	DLT_MFR                           = 0xb6\n  259  	DLT_MOST                          = 0xd3\n  ...\n 1369  	EPROCLIM        = syscall.Errno(0x43)\n 1370  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1371: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1372  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1373  	EPROTO          = syscall.Errno(0x64)\n ....\n 1379  	EREMOTE         = syscall.Errno(0x47)\n 1380  	EROFS           = syscall.Errno(0x1e)\n 1381: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1382  	ESHLIBVERS      = syscall.Errno(0x57)\n 1383  	ESHUTDOWN       = syscall.Errno(0x3a)\n ....\n 1519  	85:  \"bad executable (or shared library)\",\n 1520  	86:  \"bad CPU type in executable\",\n 1521: 	87:  \"shared library version mismatch\",\n 1522  	88:  \"malformed Mach-o file\",\n 1523  	89:  \"operation canceled\",\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_darwin_arm.go:\n 1231  	EPROCLIM        = syscall.Errno(0x43)\n 1232  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1233: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1234  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1235  	EPROTO          = syscall.Errno(0x64)\n ....\n 1241  	EREMOTE         = syscall.Errno(0x47)\n 1242  	EROFS           = syscall.Errno(0x1e)\n 1243: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1244  	ESHLIBVERS      = syscall.Errno(0x57)\n 1245  	ESHUTDOWN       = syscall.Errno(0x3a)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_darwin_arm64.go:\n  254  	DLT_LOOP                          = 0x6c\n  255  	DLT_LTALK                         = 0x72\n  256: 	DLT_MATCHING_MAX                  = 0xf5\n  257: 	DLT_MATCHING_MIN                  = 0x68\n  258  	DLT_MFR                           = 0xb6\n  259  	DLT_MOST                          = 0xd3\n  ...\n 1369  	EPROCLIM        = syscall.Errno(0x43)\n 1370  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1371: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1372  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1373  	EPROTO          = syscall.Errno(0x64)\n ....\n 1379  	EREMOTE         = syscall.Errno(0x47)\n 1380  	EROFS           = syscall.Errno(0x1e)\n 1381: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1382  	ESHLIBVERS      = syscall.Errno(0x57)\n 1383  	ESHUTDOWN       = syscall.Errno(0x3a)\n ....\n 1519  	85:  \"bad executable (or shared library)\",\n 1520  	86:  \"bad CPU type in executable\",\n 1521: 	87:  \"shared library version mismatch\",\n 1522  	88:  \"malformed Mach-o file\",\n 1523  	89:  \"operation canceled\",\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_dragonfly_386.go:\n 1323  	EPROCLIM        = syscall.Errno(0x43)\n 1324  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1325: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1326  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1327  	EPROTO          = syscall.Errno(0x5c)\n ....\n 1331  	EREMOTE         = syscall.Errno(0x47)\n 1332  	EROFS           = syscall.Errno(0x1e)\n 1333: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1334  	ESHUTDOWN       = syscall.Errno(0x3a)\n 1335  	ESOCKTNOSUPPORT = syscall.Errno(0x2c)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_dragonfly_amd64.go:\n 1323  	EPROCLIM        = syscall.Errno(0x43)\n 1324  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1325: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1326  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1327  	EPROTO          = syscall.Errno(0x5c)\n ....\n 1331  	EREMOTE         = syscall.Errno(0x47)\n 1332  	EROFS           = syscall.Errno(0x1e)\n 1333: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1334  	ESHUTDOWN       = syscall.Errno(0x3a)\n 1335  	ESOCKTNOSUPPORT = syscall.Errno(0x2c)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_freebsd_386.go:\n  353  	DLT_LOOP                          = 0x6c\n  354  	DLT_LTALK                         = 0x72\n  355: 	DLT_MATCHING_MAX                  = 0xf6\n  356: 	DLT_MATCHING_MIN                  = 0x68\n  357  	DLT_MFR                           = 0xb6\n  358  	DLT_MOST                          = 0xd3\n  ...\n 1545  	EPROCLIM        = syscall.Errno(0x43)\n 1546  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1547: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1548  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1549  	EPROTO          = syscall.Errno(0x5c)\n ....\n 1553  	EREMOTE         = syscall.Errno(0x47)\n 1554  	EROFS           = syscall.Errno(0x1e)\n 1555: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1556  	ESHUTDOWN       = syscall.Errno(0x3a)\n 1557  	ESOCKTNOSUPPORT = syscall.Errno(0x2c)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_freebsd_amd64.go:\n  353  	DLT_LOOP                          = 0x6c\n  354  	DLT_LTALK                         = 0x72\n  355: 	DLT_MATCHING_MAX                  = 0xf6\n  356: 	DLT_MATCHING_MIN                  = 0x68\n  357  	DLT_MFR                           = 0xb6\n  358  	DLT_MOST                          = 0xd3\n  ...\n 1550  	EPROCLIM        = syscall.Errno(0x43)\n 1551  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1552: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1553  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1554  	EPROTO          = syscall.Errno(0x5c)\n ....\n 1558  	EREMOTE         = syscall.Errno(0x47)\n 1559  	EROFS           = syscall.Errno(0x1e)\n 1560: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1561  	ESHUTDOWN       = syscall.Errno(0x3a)\n 1562  	ESOCKTNOSUPPORT = syscall.Errno(0x2c)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_freebsd_arm.go:\n  339  	DLT_LOOP                          = 0x6c\n  340  	DLT_LTALK                         = 0x72\n  341: 	DLT_MATCHING_MAX                  = 0xf6\n  342: 	DLT_MATCHING_MIN                  = 0x68\n  343  	DLT_MFR                           = 0xb6\n  344  	DLT_MOST                          = 0xd3\n  ...\n 1531  	EPROCLIM        = syscall.Errno(0x43)\n 1532  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1533: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1534  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1535  	EPROTO          = syscall.Errno(0x5c)\n ....\n 1539  	EREMOTE         = syscall.Errno(0x47)\n 1540  	EROFS           = syscall.Errno(0x1e)\n 1541: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1542  	ESHUTDOWN       = syscall.Errno(0x3a)\n 1543  	ESOCKTNOSUPPORT = syscall.Errno(0x2c)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_linux_386.go:\n  770  	NLM_F_ECHO                       = 0x8\n  771  	NLM_F_EXCL                       = 0x200\n  772: 	NLM_F_MATCH                      = 0x200\n  773  	NLM_F_MULTI                      = 0x2\n  774  	NLM_F_REPLACE                    = 0x100\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_linux_amd64.go:\n  770  	NLM_F_ECHO                       = 0x8\n  771  	NLM_F_EXCL                       = 0x200\n  772: 	NLM_F_MATCH                      = 0x200\n  773  	NLM_F_MULTI                      = 0x2\n  774  	NLM_F_REPLACE                    = 0x100\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_linux_arm.go:\n  654  	NLM_F_ECHO                       = 0x8\n  655  	NLM_F_EXCL                       = 0x200\n  656: 	NLM_F_MATCH                      = 0x200\n  657  	NLM_F_MULTI                      = 0x2\n  658  	NLM_F_REPLACE                    = 0x100\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_linux_arm64.go:\n  802  	NLM_F_ECHO                       = 0x8\n  803  	NLM_F_EXCL                       = 0x200\n  804: 	NLM_F_MATCH                      = 0x200\n  805  	NLM_F_MULTI                      = 0x2\n  806  	NLM_F_REPLACE                    = 0x100\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_linux_ppc64.go:\n  792  	NLM_F_ECHO                       = 0x8\n  793  	NLM_F_EXCL                       = 0x200\n  794: 	NLM_F_MATCH                      = 0x200\n  795  	NLM_F_MULTI                      = 0x2\n  796  	NLM_F_REPLACE                    = 0x100\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_linux_ppc64le.go:\n  800  	NLM_F_ECHO                       = 0x8\n  801  	NLM_F_EXCL                       = 0x200\n  802: 	NLM_F_MATCH                      = 0x200\n  803  	NLM_F_MULTI                      = 0x2\n  804  	NLM_F_REPLACE                    = 0x100\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_netbsd_386.go:\n 1516  	EPROCLIM        = syscall.Errno(0x43)\n 1517  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1518: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1519  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1520  	EPROTO          = syscall.Errno(0x60)\n ....\n 1524  	EREMOTE         = syscall.Errno(0x47)\n 1525  	EROFS           = syscall.Errno(0x1e)\n 1526: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1527  	ESHUTDOWN       = syscall.Errno(0x3a)\n 1528  	ESOCKTNOSUPPORT = syscall.Errno(0x2c)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_netbsd_amd64.go:\n 1506  	EPROCLIM        = syscall.Errno(0x43)\n 1507  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1508: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1509  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1510  	EPROTO          = syscall.Errno(0x60)\n ....\n 1514  	EREMOTE         = syscall.Errno(0x47)\n 1515  	EROFS           = syscall.Errno(0x1e)\n 1516: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1517  	ESHUTDOWN       = syscall.Errno(0x3a)\n 1518  	ESOCKTNOSUPPORT = syscall.Errno(0x2c)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_netbsd_arm.go:\n 1492  	EPROCLIM        = syscall.Errno(0x43)\n 1493  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1494: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1495  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1496  	EPROTO          = syscall.Errno(0x60)\n ....\n 1500  	EREMOTE         = syscall.Errno(0x47)\n 1501  	EROFS           = syscall.Errno(0x1e)\n 1502: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1503  	ESHUTDOWN       = syscall.Errno(0x3a)\n 1504  	ESOCKTNOSUPPORT = syscall.Errno(0x2c)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_openbsd_386.go:\n 1395  	EPROCLIM        = syscall.Errno(0x43)\n 1396  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1397: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1398  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1399  	EPROTONOSUPPORT = syscall.Errno(0x2b)\n ....\n 1402  	EREMOTE         = syscall.Errno(0x47)\n 1403  	EROFS           = syscall.Errno(0x1e)\n 1404: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1405  	ESHUTDOWN       = syscall.Errno(0x3a)\n 1406  	ESOCKTNOSUPPORT = syscall.Errno(0x2c)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zerrors_openbsd_amd64.go:\n 1394  	EPROCLIM        = syscall.Errno(0x43)\n 1395  	EPROCUNAVAIL    = syscall.Errno(0x4c)\n 1396: 	EPROGMISMATCH   = syscall.Errno(0x4b)\n 1397  	EPROGUNAVAIL    = syscall.Errno(0x4a)\n 1398  	EPROTONOSUPPORT = syscall.Errno(0x2b)\n ....\n 1401  	EREMOTE         = syscall.Errno(0x47)\n 1402  	EROFS           = syscall.Errno(0x1e)\n 1403: 	ERPCMISMATCH    = syscall.Errno(0x49)\n 1404  	ESHUTDOWN       = syscall.Errno(0x3a)\n 1405  	ESOCKTNOSUPPORT = syscall.Errno(0x2c)\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zsysnum_darwin_386.go:\n  366  	SYS_COALITION                      = 458\n  367  	SYS_COALITION_INFO                 = 459\n  368: 	SYS_NECP_MATCH_POLICY              = 460\n  369  	SYS_GETATTRLISTBULK                = 461\n  370  	SYS_OPENAT                         = 463\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zsysnum_darwin_amd64.go:\n  366  	SYS_COALITION                      = 458\n  367  	SYS_COALITION_INFO                 = 459\n  368: 	SYS_NECP_MATCH_POLICY              = 460\n  369  	SYS_GETATTRLISTBULK                = 461\n  370  	SYS_OPENAT                         = 463\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/unix/zsysnum_darwin_arm64.go:\n  366  	SYS_COALITION                      = 458\n  367  	SYS_COALITION_INFO                 = 459\n  368: 	SYS_NECP_MATCH_POLICY              = 460\n  369  	SYS_GETATTRLISTBULK                = 461\n  370  	SYS_OPENAT                         = 463\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/sys/windows/ztypes_windows.go:\n  244  	CRYPT_DEFAULT_CONTAINER_OPTIONAL = 0x00000080\n  245  \n  246: 	USAGE_MATCH_TYPE_AND = 0\n  247: 	USAGE_MATCH_TYPE_OR  = 1\n  248  \n  249  	X509_ASN_ENCODING   = 0x00000001\n  ...\n  290  	CERT_E_PURPOSE       = 0x800B0106\n  291  	CERT_E_UNTRUSTEDROOT = 0x800B0109\n  292: 	CERT_E_CN_NO_MATCH   = 0x800B010F\n  293  \n  294  	AUTHTYPE_CLIENT = 1\n  ...\n  905  }\n  906  \n  907: type CertUsageMatch struct {\n  908  	Type  uint32\n  909  	Usage CertEnhKeyUsage\n  ...\n  917  type CertChainPara struct {\n  918  	Size                         uint32\n  919: 	RequestedUsage               CertUsageMatch\n  920: 	RequstedIssuancePolicy       CertUsageMatch\n  921  	URLRetrievalTimeout          uint32\n  922  	CheckRevocationFreshnessTime uint32\n  ...\n 1053  	PFL_RECOMMENDED_PROTO_ENTRY = 0x00000002\n 1054  	PFL_HIDDEN                  = 0x00000004\n 1055: 	PFL_MATCHES_PROTOCOL_ZERO   = 0x00000008\n 1056  	PFL_NETWORKDIRECT_PROVIDER  = 0x00000010\n 1057  )\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/golang.org/x/text/unicode/norm/trie.go:\n   32  // lookupValue determines the type of block n and looks up the value for b.\n   33  // For n < t.cutoff, the block is a simple lookup table. Otherwise, the block\n   34: // is a list of ranges with an accompanying value. Given a matching range r,\n   35  // the value for b is by r.value + (b - r.lo) * stride.\n   36  func (t *sparseBlocks) lookup(n uint32, b byte) uint16 {\n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/gopkg.in/yaml.v2/encode.go:\n  230  		return false\n  231  	}\n  232: 	// Do the full match.\n  233: 	return base60float.MatchString(s)\n  234  }\n  235  \n\n/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/vendor/gopkg.in/yaml.v2/yaml.go:\n   53  // The type of the decoded values should be compatible with the respective\n   54  // values in out. If one or more values cannot be decoded due to a type\n   55: // mismatches, decoding continues partially until the end of the YAML\n   56  // content, and a *yaml.TypeError is returned with details for all\n   57  // missed values.\n\n422 matches across 97 files\n",
+			"settings":
+			{
+				"buffer_size": 72527,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "vendor/github.com/cheyang/fog/util/util.go",
+			"settings":
+			{
+				"buffer_size": 570,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "helper/helper.go",
+			"settings":
+			{
+				"buffer_size": 1001,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/usr/local/opt/go/libexec/src/regexp/regexp.go",
+			"settings":
+			{
+				"buffer_size": 34364,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "types/deploy.go",
+			"settings":
+			{
+				"buffer_size": 537,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/create/aliyun.go",
+			"settings":
+			{
+				"buffer_size": 1249,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/scale/aliyun.go",
+			"settings":
+			{
+				"buffer_size": 395,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/scale/ansible.go",
+			"settings":
+			{
+				"buffer_size": 4331,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "cmd/create/cmd.go",
+			"settings":
+			{
+				"buffer_size": 5165,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -345,10 +479,18 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer"
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/cmd",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/cmd/create",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/cmd/scale",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/helper",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/templates",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/templates/create",
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/types"
 	],
 	"file_history":
 	[
+		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/kube-deployer/cmd/main.go",
 		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/deploy.sublime-project",
 		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cluster/expand.go",
 		"/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/cluster/ansible/deployer.go",
@@ -413,7 +555,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -430,6 +572,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"deployer_type.",
+			"types.",
+			"deployer_type",
+			"types.",
+			"match",
 			"inventoryFile",
 			"createInventoryFile",
 			"BuildHostConfigs",
@@ -552,10 +699,7 @@
 			"reserved",
 			"printf",
 			"log.Infof",
-			"createContainer",
-			"cancel",
-			"gofmt",
-			"fmt_cmd"
+			"createContainer"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -573,8 +717,2107 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "cmd/scale/cmd.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2949,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								604,
+								604
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 15.0,
+						"translation.y": 686.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/types/spec.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2070,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								236,
+								236
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/persist/store.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1348,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								696,
+								696
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/lingerlove/Tools/go-tools/src/github.com/cheyang/fog/util/util.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 883,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								534,
+								534
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 72527,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										252,
+										257
+									],
+									[
+										579,
+										584
+									],
+									[
+										890,
+										895
+									],
+									[
+										1086,
+										1091
+									],
+									[
+										1435,
+										1440
+									],
+									[
+										1470,
+										1475
+									],
+									[
+										1496,
+										1501
+									],
+									[
+										1544,
+										1549
+									],
+									[
+										1590,
+										1595
+									],
+									[
+										1634,
+										1639
+									],
+									[
+										1756,
+										1761
+									],
+									[
+										1796,
+										1801
+									],
+									[
+										1823,
+										1828
+									],
+									[
+										1979,
+										1984
+									],
+									[
+										2025,
+										2030
+									],
+									[
+										2069,
+										2074
+									],
+									[
+										2114,
+										2119
+									],
+									[
+										2158,
+										2163
+									],
+									[
+										2202,
+										2207
+									],
+									[
+										2253,
+										2258
+									],
+									[
+										2308,
+										2313
+									],
+									[
+										2439,
+										2444
+									],
+									[
+										2476,
+										2481
+									],
+									[
+										2522,
+										2527
+									],
+									[
+										2570,
+										2575
+									],
+									[
+										2622,
+										2627
+									],
+									[
+										2821,
+										2826
+									],
+									[
+										2966,
+										2971
+									],
+									[
+										3031,
+										3036
+									],
+									[
+										3204,
+										3209
+									],
+									[
+										3602,
+										3607
+									],
+									[
+										3855,
+										3860
+									],
+									[
+										4081,
+										4086
+									],
+									[
+										4136,
+										4141
+									],
+									[
+										4264,
+										4269
+									],
+									[
+										4297,
+										4302
+									],
+									[
+										4439,
+										4444
+									],
+									[
+										4502,
+										4507
+									],
+									[
+										4690,
+										4695
+									],
+									[
+										4856,
+										4861
+									],
+									[
+										5128,
+										5133
+									],
+									[
+										5356,
+										5361
+									],
+									[
+										5607,
+										5612
+									],
+									[
+										5952,
+										5957
+									],
+									[
+										6235,
+										6240
+									],
+									[
+										6276,
+										6281
+									],
+									[
+										6299,
+										6304
+									],
+									[
+										6319,
+										6324
+									],
+									[
+										6383,
+										6388
+									],
+									[
+										6393,
+										6398
+									],
+									[
+										6535,
+										6540
+									],
+									[
+										6575,
+										6580
+									],
+									[
+										6595,
+										6600
+									],
+									[
+										6708,
+										6713
+									],
+									[
+										6838,
+										6843
+									],
+									[
+										6865,
+										6870
+									],
+									[
+										6898,
+										6903
+									],
+									[
+										6986,
+										6991
+									],
+									[
+										7132,
+										7137
+									],
+									[
+										7373,
+										7378
+									],
+									[
+										7626,
+										7631
+									],
+									[
+										8026,
+										8031
+									],
+									[
+										8260,
+										8265
+									],
+									[
+										8541,
+										8546
+									],
+									[
+										8831,
+										8836
+									],
+									[
+										8878,
+										8883
+									],
+									[
+										8957,
+										8962
+									],
+									[
+										9021,
+										9026
+									],
+									[
+										9094,
+										9099
+									],
+									[
+										9190,
+										9195
+									],
+									[
+										9236,
+										9241
+									],
+									[
+										9357,
+										9362
+									],
+									[
+										9428,
+										9433
+									],
+									[
+										9539,
+										9544
+									],
+									[
+										9601,
+										9606
+									],
+									[
+										9812,
+										9817
+									],
+									[
+										9944,
+										9949
+									],
+									[
+										10083,
+										10088
+									],
+									[
+										10238,
+										10243
+									],
+									[
+										10323,
+										10328
+									],
+									[
+										10520,
+										10525
+									],
+									[
+										10722,
+										10727
+									],
+									[
+										10948,
+										10953
+									],
+									[
+										11230,
+										11235
+									],
+									[
+										11267,
+										11272
+									],
+									[
+										11302,
+										11307
+									],
+									[
+										11335,
+										11340
+									],
+									[
+										11578,
+										11583
+									],
+									[
+										11715,
+										11720
+									],
+									[
+										12010,
+										12015
+									],
+									[
+										12264,
+										12269
+									],
+									[
+										12354,
+										12359
+									],
+									[
+										12471,
+										12476
+									],
+									[
+										12636,
+										12641
+									],
+									[
+										12886,
+										12891
+									],
+									[
+										12949,
+										12954
+									],
+									[
+										13224,
+										13229
+									],
+									[
+										13378,
+										13383
+									],
+									[
+										13446,
+										13451
+									],
+									[
+										13539,
+										13544
+									],
+									[
+										13596,
+										13601
+									],
+									[
+										13833,
+										13838
+									],
+									[
+										13892,
+										13897
+									],
+									[
+										14016,
+										14021
+									],
+									[
+										14054,
+										14059
+									],
+									[
+										14075,
+										14080
+									],
+									[
+										14092,
+										14097
+									],
+									[
+										14174,
+										14179
+									],
+									[
+										14253,
+										14258
+									],
+									[
+										14286,
+										14291
+									],
+									[
+										14354,
+										14359
+									],
+									[
+										14557,
+										14562
+									],
+									[
+										14612,
+										14617
+									],
+									[
+										14694,
+										14699
+									],
+									[
+										14756,
+										14761
+									],
+									[
+										14820,
+										14825
+									],
+									[
+										15019,
+										15024
+									],
+									[
+										15074,
+										15079
+									],
+									[
+										15150,
+										15155
+									],
+									[
+										15183,
+										15188
+									],
+									[
+										15311,
+										15316
+									],
+									[
+										15370,
+										15375
+									],
+									[
+										15673,
+										15678
+									],
+									[
+										15997,
+										16002
+									],
+									[
+										16031,
+										16036
+									],
+									[
+										16061,
+										16066
+									],
+									[
+										16195,
+										16200
+									],
+									[
+										16318,
+										16323
+									],
+									[
+										16689,
+										16694
+									],
+									[
+										16964,
+										16969
+									],
+									[
+										17391,
+										17396
+									],
+									[
+										17663,
+										17668
+									],
+									[
+										17690,
+										17695
+									],
+									[
+										17719,
+										17724
+									],
+									[
+										17756,
+										17761
+									],
+									[
+										17869,
+										17874
+									],
+									[
+										17881,
+										17886
+									],
+									[
+										17893,
+										17898
+									],
+									[
+										17905,
+										17910
+									],
+									[
+										18051,
+										18056
+									],
+									[
+										18438,
+										18443
+									],
+									[
+										18749,
+										18754
+									],
+									[
+										19031,
+										19036
+									],
+									[
+										19113,
+										19118
+									],
+									[
+										19134,
+										19139
+									],
+									[
+										19265,
+										19270
+									],
+									[
+										19361,
+										19366
+									],
+									[
+										19655,
+										19660
+									],
+									[
+										19895,
+										19900
+									],
+									[
+										20301,
+										20306
+									],
+									[
+										20695,
+										20700
+									],
+									[
+										21058,
+										21063
+									],
+									[
+										21151,
+										21156
+									],
+									[
+										21177,
+										21182
+									],
+									[
+										21243,
+										21248
+									],
+									[
+										21281,
+										21286
+									],
+									[
+										21322,
+										21327
+									],
+									[
+										21355,
+										21360
+									],
+									[
+										21542,
+										21547
+									],
+									[
+										21609,
+										21614
+									],
+									[
+										21700,
+										21705
+									],
+									[
+										21715,
+										21720
+									],
+									[
+										21767,
+										21772
+									],
+									[
+										22100,
+										22105
+									],
+									[
+										22291,
+										22296
+									],
+									[
+										22479,
+										22484
+									],
+									[
+										22546,
+										22551
+									],
+									[
+										22908,
+										22913
+									],
+									[
+										23028,
+										23033
+									],
+									[
+										23288,
+										23293
+									],
+									[
+										23480,
+										23485
+									],
+									[
+										23841,
+										23846
+									],
+									[
+										24106,
+										24111
+									],
+									[
+										24289,
+										24294
+									],
+									[
+										24605,
+										24610
+									],
+									[
+										25015,
+										25020
+									],
+									[
+										25164,
+										25169
+									],
+									[
+										25617,
+										25622
+									],
+									[
+										25693,
+										25698
+									],
+									[
+										25771,
+										25776
+									],
+									[
+										26034,
+										26039
+									],
+									[
+										26181,
+										26186
+									],
+									[
+										26250,
+										26255
+									],
+									[
+										26292,
+										26297
+									],
+									[
+										26317,
+										26322
+									],
+									[
+										26474,
+										26479
+									],
+									[
+										26593,
+										26598
+									],
+									[
+										26882,
+										26887
+									],
+									[
+										27072,
+										27077
+									],
+									[
+										27199,
+										27204
+									],
+									[
+										27241,
+										27246
+									],
+									[
+										27423,
+										27428
+									],
+									[
+										27488,
+										27493
+									],
+									[
+										27820,
+										27825
+									],
+									[
+										28101,
+										28106
+									],
+									[
+										28340,
+										28345
+									],
+									[
+										28401,
+										28406
+									],
+									[
+										28447,
+										28452
+									],
+									[
+										28642,
+										28647
+									],
+									[
+										28660,
+										28665
+									],
+									[
+										28732,
+										28737
+									],
+									[
+										28830,
+										28835
+									],
+									[
+										28859,
+										28864
+									],
+									[
+										28887,
+										28892
+									],
+									[
+										28949,
+										28954
+									],
+									[
+										28974,
+										28979
+									],
+									[
+										29003,
+										29008
+									],
+									[
+										29059,
+										29064
+									],
+									[
+										29235,
+										29240
+									],
+									[
+										29266,
+										29271
+									],
+									[
+										29296,
+										29301
+									],
+									[
+										29354,
+										29359
+									],
+									[
+										29377,
+										29382
+									],
+									[
+										29408,
+										29413
+									],
+									[
+										29464,
+										29469
+									],
+									[
+										29691,
+										29696
+									],
+									[
+										29721,
+										29726
+									],
+									[
+										29792,
+										29797
+									],
+									[
+										29828,
+										29833
+									],
+									[
+										29859,
+										29864
+									],
+									[
+										29941,
+										29946
+									],
+									[
+										30167,
+										30172
+									],
+									[
+										30194,
+										30199
+									],
+									[
+										30222,
+										30227
+									],
+									[
+										30264,
+										30269
+									],
+									[
+										30278,
+										30283
+									],
+									[
+										30307,
+										30312
+									],
+									[
+										30353,
+										30358
+									],
+									[
+										30553,
+										30558
+									],
+									[
+										30631,
+										30636
+									],
+									[
+										30770,
+										30775
+									],
+									[
+										30926,
+										30931
+									],
+									[
+										30979,
+										30984
+									],
+									[
+										31013,
+										31018
+									],
+									[
+										31055,
+										31060
+									],
+									[
+										31075,
+										31080
+									],
+									[
+										31110,
+										31115
+									],
+									[
+										31162,
+										31167
+									],
+									[
+										31343,
+										31348
+									],
+									[
+										31411,
+										31416
+									],
+									[
+										31442,
+										31447
+									],
+									[
+										31526,
+										31531
+									],
+									[
+										31568,
+										31573
+									],
+									[
+										31600,
+										31605
+									],
+									[
+										31669,
+										31674
+									],
+									[
+										32016,
+										32021
+									],
+									[
+										32334,
+										32339
+									],
+									[
+										32649,
+										32654
+									],
+									[
+										32754,
+										32759
+									],
+									[
+										32895,
+										32900
+									],
+									[
+										33060,
+										33065
+									],
+									[
+										33105,
+										33110
+									],
+									[
+										33292,
+										33297
+									],
+									[
+										33409,
+										33414
+									],
+									[
+										33454,
+										33459
+									],
+									[
+										33519,
+										33524
+									],
+									[
+										33557,
+										33562
+									],
+									[
+										33692,
+										33697
+									],
+									[
+										33827,
+										33832
+									],
+									[
+										33915,
+										33920
+									],
+									[
+										34002,
+										34007
+									],
+									[
+										34179,
+										34184
+									],
+									[
+										34283,
+										34288
+									],
+									[
+										34399,
+										34404
+									],
+									[
+										34454,
+										34459
+									],
+									[
+										34563,
+										34568
+									],
+									[
+										34617,
+										34622
+									],
+									[
+										34783,
+										34788
+									],
+									[
+										35080,
+										35085
+									],
+									[
+										35355,
+										35360
+									],
+									[
+										35637,
+										35642
+									],
+									[
+										35921,
+										35926
+									],
+									[
+										36285,
+										36290
+									],
+									[
+										36892,
+										36897
+									],
+									[
+										37303,
+										37308
+									],
+									[
+										37616,
+										37621
+									],
+									[
+										37735,
+										37740
+									],
+									[
+										37903,
+										37908
+									],
+									[
+										38272,
+										38277
+									],
+									[
+										38683,
+										38688
+									],
+									[
+										38970,
+										38975
+									],
+									[
+										39077,
+										39082
+									],
+									[
+										39263,
+										39268
+									],
+									[
+										39664,
+										39669
+									],
+									[
+										39724,
+										39729
+									],
+									[
+										40092,
+										40097
+									],
+									[
+										40584,
+										40589
+									],
+									[
+										40733,
+										40738
+									],
+									[
+										40813,
+										40818
+									],
+									[
+										41063,
+										41068
+									],
+									[
+										41277,
+										41282
+									],
+									[
+										41338,
+										41343
+									],
+									[
+										41610,
+										41615
+									],
+									[
+										41863,
+										41868
+									],
+									[
+										42094,
+										42099
+									],
+									[
+										42457,
+										42462
+									],
+									[
+										42541,
+										42546
+									],
+									[
+										42857,
+										42862
+									],
+									[
+										43031,
+										43036
+									],
+									[
+										43135,
+										43140
+									],
+									[
+										43239,
+										43244
+									],
+									[
+										43387,
+										43392
+									],
+									[
+										43518,
+										43523
+									],
+									[
+										43686,
+										43691
+									],
+									[
+										43850,
+										43855
+									],
+									[
+										43969,
+										43974
+									],
+									[
+										44054,
+										44059
+									],
+									[
+										44174,
+										44179
+									],
+									[
+										44328,
+										44333
+									],
+									[
+										44517,
+										44522
+									],
+									[
+										44635,
+										44640
+									],
+									[
+										44800,
+										44805
+									],
+									[
+										44945,
+										44950
+									],
+									[
+										45205,
+										45210
+									],
+									[
+										45561,
+										45566
+									],
+									[
+										45841,
+										45846
+									],
+									[
+										45976,
+										45981
+									],
+									[
+										46276,
+										46281
+									],
+									[
+										46440,
+										46445
+									],
+									[
+										46556,
+										46561
+									],
+									[
+										46635,
+										46640
+									],
+									[
+										46653,
+										46658
+									],
+									[
+										46670,
+										46675
+									],
+									[
+										46803,
+										46808
+									],
+									[
+										46820,
+										46825
+									],
+									[
+										46926,
+										46931
+									],
+									[
+										46943,
+										46948
+									],
+									[
+										46986,
+										46991
+									],
+									[
+										47029,
+										47034
+									],
+									[
+										47245,
+										47250
+									],
+									[
+										47426,
+										47431
+									],
+									[
+										47591,
+										47596
+									],
+									[
+										48060,
+										48065
+									],
+									[
+										48407,
+										48412
+									],
+									[
+										48721,
+										48726
+									],
+									[
+										48910,
+										48915
+									],
+									[
+										49367,
+										49372
+									],
+									[
+										49775,
+										49780
+									],
+									[
+										49964,
+										49969
+									],
+									[
+										50313,
+										50318
+									],
+									[
+										50664,
+										50669
+									],
+									[
+										51119,
+										51124
+									],
+									[
+										51577,
+										51582
+									],
+									[
+										51869,
+										51874
+									],
+									[
+										52234,
+										52239
+									],
+									[
+										52558,
+										52563
+									],
+									[
+										52671,
+										52676
+									],
+									[
+										53088,
+										53093
+									],
+									[
+										53285,
+										53290
+									],
+									[
+										53522,
+										53527
+									],
+									[
+										53815,
+										53820
+									],
+									[
+										54076,
+										54081
+									],
+									[
+										54277,
+										54282
+									],
+									[
+										54551,
+										54556
+									],
+									[
+										54867,
+										54872
+									],
+									[
+										55106,
+										55111
+									],
+									[
+										55407,
+										55412
+									],
+									[
+										55741,
+										55746
+									],
+									[
+										56097,
+										56102
+									],
+									[
+										56473,
+										56478
+									],
+									[
+										56522,
+										56527
+									],
+									[
+										56771,
+										56776
+									],
+									[
+										57006,
+										57011
+									],
+									[
+										57269,
+										57274
+									],
+									[
+										57585,
+										57590
+									],
+									[
+										57634,
+										57639
+									],
+									[
+										57883,
+										57888
+									],
+									[
+										58118,
+										58123
+									],
+									[
+										58381,
+										58386
+									],
+									[
+										58693,
+										58698
+									],
+									[
+										58928,
+										58933
+									],
+									[
+										59286,
+										59291
+									],
+									[
+										59335,
+										59340
+									],
+									[
+										59584,
+										59589
+									],
+									[
+										59819,
+										59824
+									],
+									[
+										60082,
+										60087
+									],
+									[
+										60397,
+										60402
+									],
+									[
+										60632,
+										60637
+									],
+									[
+										60991,
+										60996
+									],
+									[
+										61226,
+										61231
+									],
+									[
+										61583,
+										61588
+									],
+									[
+										61632,
+										61637
+									],
+									[
+										61881,
+										61886
+									],
+									[
+										62116,
+										62121
+									],
+									[
+										62475,
+										62480
+									],
+									[
+										62524,
+										62529
+									],
+									[
+										62773,
+										62778
+									],
+									[
+										63008,
+										63013
+									],
+									[
+										63365,
+										63370
+									],
+									[
+										63414,
+										63419
+									],
+									[
+										63663,
+										63668
+									],
+									[
+										63898,
+										63903
+									],
+									[
+										64253,
+										64258
+									],
+									[
+										64618,
+										64623
+									],
+									[
+										64981,
+										64986
+									],
+									[
+										65346,
+										65351
+									],
+									[
+										65711,
+										65716
+									],
+									[
+										66078,
+										66083
+									],
+									[
+										66440,
+										66445
+									],
+									[
+										66675,
+										66680
+									],
+									[
+										67031,
+										67036
+									],
+									[
+										67266,
+										67271
+									],
+									[
+										67620,
+										67625
+									],
+									[
+										67855,
+										67860
+									],
+									[
+										68210,
+										68215
+									],
+									[
+										68445,
+										68450
+									],
+									[
+										68802,
+										68807
+									],
+									[
+										69037,
+										69042
+									],
+									[
+										69398,
+										69403
+									],
+									[
+										69768,
+										69773
+									],
+									[
+										70138,
+										70143
+									],
+									[
+										70466,
+										70471
+									],
+									[
+										70499,
+										70504
+									],
+									[
+										70678,
+										70683
+									],
+									[
+										70779,
+										70784
+									],
+									[
+										70976,
+										70981
+									],
+									[
+										71028,
+										71033
+									],
+									[
+										71238,
+										71243
+									],
+									[
+										71685,
+										71690
+									],
+									[
+										71991,
+										71996
+									],
+									[
+										72025,
+										72030
+									],
+									[
+										72335,
+										72340
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								257,
+								257
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ 	].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "vendor/github.com/cheyang/fog/util/util.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 570,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								344,
+								570
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "helper/helper.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1001,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								744,
+								759
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/usr/local/opt/go/libexec/src/regexp/regexp.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34364,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12846,
+								12846
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5837.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "types/deploy.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 537,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								483,
+								497
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "templates/create/aliyun.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1249,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1060,
+								1070
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 184.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "templates/scale/aliyun.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 395,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15,
+								15
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "templates/scale/ansible.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4331,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15,
+								15
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 12,
+					"file": "cmd/create/cmd.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5165,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1664,
+								1664
+							],
+							[
+								2986,
+								2986
+							],
+							[
+								3195,
+								3195
+							],
+							[
+								3416,
+								3416
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 208.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -595,11 +2838,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.561034916875,
 			1.0
 		],
 		"rows":
@@ -671,7 +2921,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 369.0,
+	"side_bar_width": 215.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -2,18 +2,26 @@ package scale
 
 import (
 	"errors"
+	"fmt"
+	"os"
+	"path/filepath"
+	"time"
 
+	"github.com/cheyang/fog/cluster"
 	"github.com/cheyang/fog/persist"
-	"github.com/cheyang/fog/types"
+	fog "github.com/cheyang/fog/types"
 	"github.com/cheyang/fog/util"
 	"github.com/cheyang/kube-deployer/helper"
-	deployer_type "github.com/cheyang/kube-deployer/types"
+	"github.com/cheyang/kube-deployer/templates/scale"
+	"github.com/cheyang/kube-deployer/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
+const slaveName = "kube-slave"
+
 var (
-	name = ""
+	name string
 	Cmd  = &cobra.Command{
 		Use:   "scale",
 		Short: "scale out/in a k8s cluster",
@@ -21,8 +29,9 @@ var (
 			var (
 				storage   persist.Store
 				err       error
-				spec      types.Spec
-				slaveSpec types.VMSpec
+				spec      fog.Spec
+				slaveSpec *fog.VMSpec
+				scaleArgs types.ScaleArguments
 			)
 
 			if len(args) != 1 {
@@ -30,11 +39,11 @@ var (
 			}
 			name = args[len(args)-1]
 
-			storage, err = util.GetStorage(name)
+			scaleArgs, err = parseScaleArgs(cmd, args)
 			if err != nil {
 				return err
 			}
-			scaleArgs, err := parseScaleArgs(cmd, args)
+			storage, err = util.GetStorage(name)
 			if err != nil {
 				return err
 			}
@@ -47,9 +56,44 @@ var (
 				return err
 			}
 
+			// build vmspec for scaling out
 			for _, vmSpec := range spec.VMSpecs {
-
+				if vmSpec.Name == "" {
+					slaveSpec = &spec.VMSpecs[i]
+					for k, v := range spec.Properties {
+						if _, found := slaveSpec.Properties[k]; !found {
+							slaveSpec.Properties[k] = v
+						}
+					}
+					break
+				}
 			}
+
+			// scale out
+			if scaleArgs.NumNode > 0 {
+				deployFile, paramFile, err := generateConfigFiles(scaleArgs)
+				if err != nil {
+					return err
+				}
+				fmt.Printf("deployFile %s\n", deployFile)
+				fmt.Printf("paramFile %s\n", paramFile)
+
+				newSpec, err := fog.LoadSpec(deployFile)
+				if err != nil {
+					return err
+				}
+				newSpec.VMSpec[0] = *slaveSpec
+				roleMap := map[string]bool{
+					"masters": true,
+					"etcd":    true,
+				}
+
+				return cluster.ExpandCluster(storage, newSpec, roleMap)
+				// scale in
+			} else if scaleArgs.NumNode < 0 {
+				return errors.New("Not implmented yet.")
+			}
+			return nil
 		},
 	}
 )
@@ -63,7 +107,7 @@ func init() {
 	flags.StringP("node-size", "", "ecs.n1.small", "The size of node virtual machine")
 }
 
-func parseScaleArgs(cmd *cobra.Command, args []string) (*deployer_type.ScaleArguments, error) {
+func parseScaleArgs(cmd *cobra.Command, args []string) (*types.ScaleArguments, error) {
 	viper.BindEnv("key-id", "ALIYUNECS_KEY_ID")
 	viper.BindEnv("key-secret", "ALIYUNECS_KEY_SECRET")
 	viper.BindEnv("image-id", "ALIYUNECS_IMAGE_ID")
@@ -88,8 +132,8 @@ func parseScaleArgs(cmd *cobra.Command, args []string) (*deployer_type.ScaleArgu
 		return nil, err
 	}
 
-	return &deployer_type.ScaleArguments{
-		Arguments: deployer_type.Arguments{
+	return &types.ScaleArguments{
+		Arguments: types.Arguments{
 			NumNode:     scaleNumNode,
 			ImageID:     viper.GetString("image-id"),
 			NodeSize:    viper.GetString("node-size"),
@@ -97,4 +141,48 @@ func parseScaleArgs(cmd *cobra.Command, args []string) (*deployer_type.ScaleArgu
 		},
 	}, nil
 
+}
+
+func generateConfigFiles(args *types.ScaleArguments) (deployFileName, paramFileName string, err error) {
+	//check if working dir as expected
+	workingDir := filepath.Join(helper.GetRootDir(), args.ClusterName)
+	_, err = os.Stat(workingDir)
+	if os.IsNotExist(err) {
+		return deployFileName, paramFileName, fmt.Errorf("working dir %s doesn't exist, can't scale out or in", workingDir)
+	}
+
+	// create input dir for input file generation
+	t := time.Now()
+	timestamp := fmt.Sprint(t.Format("20060102150405"))
+	inputDir := filepath.Join(workingDir,
+		"input",
+		"scale_"+timestamp)
+	err = os.MkdirAll(inputDir, 0700)
+	if err != nil {
+		return deployFileName, paramFileName, err
+	}
+
+	deployFileName = filepath.Join(inputDir, "aliyun-scale.yaml")
+	paramFileName = filepath.Join(inputDir, "ansible-scale.yaml")
+	args.AnsibleVarFile = paramFileName
+
+	deployFile, err := os.OpenFile(deployFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
+	if err != nil {
+		return deployFileName, paramFileName, err
+	}
+	err = helper.RenderTemplateToFile(scale.AliyunTemplate, deployFile, args)
+	if err != nil {
+		return deployFileName, paramFileName, err
+	}
+
+	paramFile, err := os.OpenFile(paramFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
+	if err != nil {
+		return deployFileName, paramFileName, err
+	}
+	err = helper.RenderTemplateToFile(scale.AnsibleTemplate, paramFile, args)
+	if err != nil {
+		return deployFileName, paramFileName, err
+	}
+
+	return deployFileName, paramFileName, nil
 }
