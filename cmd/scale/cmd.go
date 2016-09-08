@@ -29,7 +29,6 @@ var (
 			var (
 				storage   persist.Store
 				err       error
-				spec      fog.Spec
 				slaveSpec *fog.VMSpec
 				scaleArgs *types.ScaleArguments
 			)
@@ -51,7 +50,7 @@ var (
 			if err != nil {
 				return err
 			}
-			spec, err = storage.LoadSpec()
+			spec, err := storage.LoadSpec()
 			if err != nil {
 				return err
 			}
