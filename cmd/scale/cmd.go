@@ -31,7 +31,7 @@ var (
 				err       error
 				spec      fog.Spec
 				slaveSpec *fog.VMSpec
-				scaleArgs types.ScaleArguments
+				scaleArgs *types.ScaleArguments
 			)
 
 			if len(args) != 1 {
@@ -59,7 +59,7 @@ var (
 			// build vmspec for scaling out
 			for _, vmSpec := range spec.VMSpecs {
 				if vmSpec.Name == "" {
-					slaveSpec = &spec.VMSpecs[i]
+					slaveSpec = &vmSpec
 					for k, v := range spec.Properties {
 						if _, found := slaveSpec.Properties[k]; !found {
 							slaveSpec.Properties[k] = v
@@ -82,7 +82,7 @@ var (
 				if err != nil {
 					return err
 				}
-				newSpec.VMSpec[0] = *slaveSpec
+				newSpec.VMSpecs[0] = *slaveSpec
 				roleMap := map[string]bool{
 					"masters": true,
 					"etcd":    true,

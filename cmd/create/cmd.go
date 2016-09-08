@@ -13,6 +13,7 @@ import (
 	"github.com/cheyang/fog/util/yaml"
 	"github.com/cheyang/kube-deployer/helper"
 	"github.com/cheyang/kube-deployer/templates/create"
+	"github.com/cheyang/kube-deployer/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -108,7 +109,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments,
 
 }
 
-func generateConfigFiles(args *types.DeploymentArguments) (deployFileName, paramFileName string, err error) {
+func generateConfigFiles(args *types.DeployArguments) (deployFileName, paramFileName string, err error) {
 
 	workingDir := filepath.Join(helper.GetRootDir(), args.ClusterName)
 	_, err = os.Stat(workingDir)
