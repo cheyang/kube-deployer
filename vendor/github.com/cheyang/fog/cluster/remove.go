@@ -15,8 +15,12 @@ func Remove(storePath string, s persist.Store) error {
 	}
 
 	for _, host := range hostList {
+		logrus.Infof("To remove %s", host)
 		err := host.Driver.Remove()
-		s.Remove(host.Name)
+		if err != nil {
+			logrus.Infof("host err: %v", err)
+		}
+		err = s.Remove(host.Name)
 		if err != nil {
 			logrus.Infof("host err: %v", err)
 		}
