@@ -12,7 +12,7 @@ import (
 	fog "github.com/cheyang/fog/types"
 	"github.com/cheyang/fog/util/yaml"
 	"github.com/cheyang/kube-deployer/helper"
-	"github.com/cheyang/kube-deployer/templates/create"
+	"github.com/cheyang/kube-deployer/templates/classic/create"
 	"github.com/cheyang/kube-deployer/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
