@@ -41,7 +41,7 @@ var (
 			if err != nil {
 				return err
 			}
-			var desriedNum uint = scaleArgs.NumNode
+			var desiredNum uint = scaleArgs.NumNode
 
 			storage, err = util.GetStorage(name)
 			if err != nil {
