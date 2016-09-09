@@ -38,7 +38,7 @@ Vmspecs:
       - masters
       - etcd
   - 
-    Instances: 2
+    Instances: [[[ .NumNode ]]]
     Name: kube-slave
     Properties: 
       aliyunecs-description: kube-slave

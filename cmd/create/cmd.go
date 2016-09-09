@@ -65,7 +65,6 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments,
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("numNode %d", numNode)
 
 	viper.BindEnv("key-id", "ALIYUNECS_KEY_ID")
 	viper.BindEnv("key-secret", "ALIYUNECS_KEY_SECRET")
