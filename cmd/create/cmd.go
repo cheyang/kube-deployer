@@ -57,6 +57,12 @@ func init() {
 }
 
 func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments, error) {
+	numNode, err := flags.GetUint("num-nodes")
+	if err != nil {
+		return nil, err
+	}
+	fmt.Printf("numNode %d", numNode)
+
 	viper.BindEnv("key-id", "ALIYUNECS_KEY_ID")
 	viper.BindEnv("key-secret", "ALIYUNECS_KEY_SECRET")
 	viper.BindEnv("image-id", "ALIYUNECS_IMAGE_ID")
@@ -92,18 +98,12 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments,
 		return nil, err
 	}
 
-	numNode, err := flags.GetUint("num-nodes")
-	if err != nil {
-		return nil, err
-	}
-	fmt.Printf("numNode %d", numNode)
-
 	return &types.DeployArguments{
 		KeyID:      viper.GetString("key-id"),
 		KeySecret:  viper.GetString("key-secret"),
 		Region:     viper.GetString("region"),
 		MasterSize: viper.GetString("master-size"),
-		retry:      retry,
+		Retry:      retry,
 		Arguments: types.Arguments{
 			NumNode:     numNode,
 			ImageID:     viper.GetString("image-id"),
