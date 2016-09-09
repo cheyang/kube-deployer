@@ -25,6 +25,7 @@ Properties:
   aliyunecs-security-group: k8s
   aliyunecs-system-disk-category: cloud_efficiency
   aliyunecs-io-optimized: optimized
+  aliyunecs-ssh-password: Aliyun123ECS
 Vmspecs: 
   - 
     Instances: 1
