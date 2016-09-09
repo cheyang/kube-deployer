@@ -36,8 +36,7 @@ var (
 			}
 			fmt.Printf("deployFile %s\n", deployFile)
 			fmt.Printf("paramFile %s\n", paramFile)
-			// return runDeploy(deployFile)
-			return nil
+			return runDeploy(deployFile)
 		},
 	}
 
