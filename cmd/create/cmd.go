@@ -116,14 +116,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments,
 }
 
 func generateConfigFiles(args *types.DeployArguments) (deployFileName, paramFileName string, err error) {
-
-	workingDir := filepath.Join(helper.GetRootDir(), args.ClusterName)
-	_, err = os.Stat(workingDir)
-	if !(os.IsNotExist(err) || retry) {
-		return deployFileName, paramFileName, fmt.Errorf("working dir %s is not clean, can't work in create mode", workingDir)
-	}
-
-	inputDir := filepath.Join(workingDir, "input", "create")
+	inputDir := filepath.Join(workingDir, fmt.Sprintf("%s_input", args.ClusterName), "create")
 	err = os.MkdirAll(inputDir, 0700)
 	if err != nil {
 		return deployFileName, paramFileName, err

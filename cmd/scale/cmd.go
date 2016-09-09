@@ -170,7 +170,7 @@ func parseScaleArgs(cmd *cobra.Command, args []string) (*types.ScaleArguments, e
 
 func generateConfigFiles(args *types.ScaleArguments) (deployFileName, paramFileName string, err error) {
 	//check if working dir as expected
-	workingDir := filepath.Join(helper.GetRootDir(), args.ClusterName)
+	workingDir := filepath.Join(helper.GetRootDir(), fmt.Sprintf("%s_input", args.ClusterName))
 	_, err = os.Stat(workingDir)
 	if os.IsNotExist(err) {
 		return deployFileName, paramFileName, fmt.Errorf("working dir %s doesn't exist, can't scale out or in", workingDir)
