@@ -58,7 +58,7 @@ var (
 			}
 			var runningNum uint
 			if list, found := runningHostMap[slaveName]; found {
-				runningNum = len(list)
+				runningNum = uint(len(list))
 			} else {
 				return fmt.Errorf("can't scale out/in %s, becasue it doesn't exist.", slaveName)
 			}
@@ -90,7 +90,7 @@ var (
 				fmt.Printf("paramFile %s\n", paramFile)
 
 				newSpec, err := fog.LoadSpec(deployFile)
-				defer storage.SaveSpec(newSpec)
+				defer storage.SaveSpec(&newSpec)
 				if err != nil {
 					return err
 				}
