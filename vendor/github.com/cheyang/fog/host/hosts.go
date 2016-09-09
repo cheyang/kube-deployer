@@ -95,7 +95,7 @@ func BuildHostConfigs(specs types.Spec, save bool) (vmSpecs []types.VMSpec, err 
 			vmSpec.Instances = 1
 		}
 
-		for i := 0; i < vmSpec.Instances; i++ {
+		for i := uint(0); i < vmSpec.Instances; i++ {
 			vm := vmSpec
 			id := i + vmSpec.Start
 			vm.Name = fmt.Sprintf("%s-%d", vm.Name, id)

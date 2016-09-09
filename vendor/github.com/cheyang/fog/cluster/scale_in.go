@@ -8,7 +8,7 @@ import (
 	"github.com/cheyang/fog/util"
 )
 
-func Scalein(s persist.Store, scaleInMap map[string]int) error {
+func Scalein(s persist.Store, scaleInMap map[string]uint) error {
 	hostList, _, err := persist.LoadAllHosts(s)
 	if err != nil {
 		return err
@@ -21,7 +21,7 @@ func Scalein(s persist.Store, scaleInMap map[string]int) error {
 
 	for k, v := range scaleInMap {
 		if list, found := runningHostMap[k]; found {
-			start := len(list) - v
+			start := len(list) - int(v)
 			if start < 0 {
 				start = 0
 			}

@@ -27,8 +27,8 @@ type VMSpec struct {
 	Roles           []string               `json:"Roles"`
 	Properties      map[string]interface{} `json:"Properties,omitempty"`
 	CloudDriverName string                 `json:"Driver"`
-	Instances       int                    `json:"Instances,omitempty"`
-	Start           int                    `json:"Start,omitempty"`
+	Instances       uint                   `json:"Instances,omitempty"`
+	Start           uint                   `json:"Start,omitempty"`
 }
 
 type Host struct {

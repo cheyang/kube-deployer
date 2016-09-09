@@ -18,55 +18,55 @@
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cloudprovider",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cloudprovider/providers/aliyun/k8s",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cloudprovider/registry",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cluster",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cluster/ansible",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cluster/deploy",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/host",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/persist",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/types",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/util",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/util/dump",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/util/helpers",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/util/yaml",
-			"Rev": "37eaa1f4b57741f4758528a7c6ee04e504d8f727"
+			"Rev": "4acd9742e6b606dee04f9ea42102fff86d775d43"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry-incubator/candiedyaml",
