@@ -57,6 +57,10 @@ func init() {
 }
 
 func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments, error) {
+	var (
+		err   error
+		flags = cmd.Flags()
+	)
 	numNode, err := flags.GetUint("num-nodes")
 	if err != nil {
 		return nil, err
@@ -71,7 +75,6 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments,
 	viper.BindEnv("node-size", "ALIYUNECS_NODE_SIZE")
 	viper.BindEnv("cluster-name", "ALIYUNECS_CLUSTER_NAME")
 
-	flags := cmd.Flags()
 	viper.BindPFlag("key-id", flags.Lookup("key-id"))
 	viper.BindPFlag("key-secret", flags.Lookup("key-secret"))
 	viper.BindPFlag("image-id", flags.Lookup("image-id"))
@@ -92,7 +95,6 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments,
 	if name == "" {
 		return nil, errors.New("--cluster-name is mandatory")
 	}
-	var err error
 	retry, err = flags.GetBool("retry")
 	if err != nil {
 		return nil, err
