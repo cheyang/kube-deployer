@@ -96,12 +96,14 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments,
 	if err != nil {
 		return nil, err
 	}
+	fmt.Printf("numNode %d", numNode)
 
 	return &types.DeployArguments{
 		KeyID:      viper.GetString("key-id"),
 		KeySecret:  viper.GetString("key-secret"),
 		Region:     viper.GetString("region"),
 		MasterSize: viper.GetString("master-size"),
+		retry:      retry,
 		Arguments: types.Arguments{
 			NumNode:     numNode,
 			ImageID:     viper.GetString("image-id"),
