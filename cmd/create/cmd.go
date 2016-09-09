@@ -116,7 +116,7 @@ func parseDeployArgs(cmd *cobra.Command, args []string) (*types.DeployArguments,
 }
 
 func generateConfigFiles(args *types.DeployArguments) (deployFileName, paramFileName string, err error) {
-	inputDir := filepath.Join(helper.GetRootDIr(), fmt.Sprintf("%s_input", args.ClusterName), "create")
+	inputDir := filepath.Join(helper.GetRootDir(), fmt.Sprintf("%s_input", args.ClusterName), "create")
 	err = os.MkdirAll(inputDir, 0700)
 	if err != nil {
 		return deployFileName, paramFileName, err
