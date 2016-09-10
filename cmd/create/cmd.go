@@ -158,7 +158,7 @@ func generateConfigFiles(args *types.DeployArguments) (deployFileName, paramFile
 	return deployFileName, paramFileName, nil
 }
 
-func runDeploy(configFile string) ([]fog.Host, error) {
+func runDeploy(configFile string) ([]*fog.Host, error) {
 	//read and parse the config file
 	var (
 		spec  = fog.Spec{}
