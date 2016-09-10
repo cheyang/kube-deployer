@@ -38,7 +38,7 @@ func ParseScaleFlag(s string) (num int, err error) {
 	return num, err
 }
 
-func GetCurrentHosts(s persist.Store) ([]types.Host, error) {
+func GetCurrentHosts(s persist.Store) ([]*types.Host, error) {
 	hostList, hostInErrs, err := persist.LoadAllHosts(s)
 	if err != nil {
 		return hostList, err
