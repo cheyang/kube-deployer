@@ -17,7 +17,7 @@ type HostHandler struct {
 	Name      string
 	Driver    drivers.Driver
 	VMSpec    types.VMSpec
-	createBus chan<- types.Host
+	createBus chan<- *types.Host
 }
 
 func (this *HostHandler) createOrGet() {
@@ -42,7 +42,7 @@ func (this *HostHandler) createOrGet() {
 	}
 
 	// put host the createBus
-	this.createBus <- *host
+	this.createBus <- host
 
 	log.Infof("Finished creating host %s\n", this.Name)
 }

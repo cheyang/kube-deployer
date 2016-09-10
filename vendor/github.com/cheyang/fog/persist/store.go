@@ -37,8 +37,8 @@ type Store interface {
 	LoadSpec() (*types.Spec, error)
 }
 
-func LoadHosts(s Store, hostNames []string) ([]types.Host, map[string]error) {
-	loadedHosts := []types.Host{}
+func LoadHosts(s Store, hostNames []string) ([]*types.Host, map[string]error) {
+	loadedHosts := []*types.Host{}
 	errors := map[string]error{}
 
 	for _, hostName := range hostNames {
@@ -46,14 +46,14 @@ func LoadHosts(s Store, hostNames []string) ([]types.Host, map[string]error) {
 		if err != nil {
 			errors[hostName] = err
 		} else {
-			loadedHosts = append(loadedHosts, *h)
+			loadedHosts = append(loadedHosts, h)
 		}
 	}
 
 	return loadedHosts, errors
 }
 
-func LoadAllHosts(s Store) ([]types.Host, map[string]error, error) {
+func LoadAllHosts(s Store) ([]*types.Host, map[string]error, error) {
 	hostNames, err := s.List()
 	logrus.Infof("hostname :%v", hostNames)
 	if err != nil {

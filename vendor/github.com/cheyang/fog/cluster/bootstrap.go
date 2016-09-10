@@ -6,7 +6,7 @@ import (
 	"github.com/cheyang/fog/util/dump"
 )
 
-func Bootstrap(spec types.Spec) (hosts []types.Host, err error) {
+func Bootstrap(spec types.Spec) (hosts []*types.Host, err error) {
 
 	err = types.Validate(spec)
 	if err != nil {

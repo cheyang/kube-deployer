@@ -34,10 +34,10 @@ func init() {
 
 type ansibleManager struct {
 	name                  string
-	hosts                 []types.Host
+	hosts                 []*types.Host
 	containerCreateConfig *docker.ContainerCreateConfig
 	run                   []string
-	roleMap               map[string][]types.Host
+	roleMap               map[string][]*types.Host
 	store                 persist.Store
 }
 
@@ -118,17 +118,17 @@ func (this *ansibleManager) SetCommander(cmd interface{}) error {
 	return nil
 }
 
-func (this *ansibleManager) SetHosts(hosts []types.Host) {
+func (this *ansibleManager) SetHosts(hosts []*types.Host) {
 
 	this.hosts = hosts
-	this.roleMap = make(map[string][]types.Host)
+	this.roleMap = make(map[string][]*types.Host)
 
 	for _, host := range hosts {
 
 		for _, role := range host.Roles {
 
 			if _, found := this.roleMap[role]; !found {
-				this.roleMap[role] = make([]types.Host, 0)
+				this.roleMap[role] = make([]*types.Host, 0)
 			}
 
 			this.roleMap[role] = append(this.roleMap[role], host)

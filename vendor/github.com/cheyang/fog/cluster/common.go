@@ -8,8 +8,8 @@ import (
 	"github.com/cheyang/fog/types"
 )
 
-func provisionVMs(spec types.Spec, save bool) (hosts []types.Host, err error) {
-	bus := make(chan types.Host)
+func provisionVMs(spec types.Spec, save bool) (hosts []*types.Host, err error) {
+	bus := make(chan *types.Host)
 	defer close(bus)
 	vmSpecs, err := host_utils.BuildHostConfigs(spec, save)
 	if err != nil {
@@ -22,7 +22,7 @@ func provisionVMs(spec types.Spec, save bool) (hosts []types.Host, err error) {
 		return hosts, err
 	}
 
-	hosts = make([]types.Host, hostCount)
+	hosts = make([]*types.Host, hostCount)
 	for i := 0; i < hostCount; i++ {
 		hosts[i] = <-bus
 	}
@@ -36,7 +36,7 @@ func provisionVMs(spec types.Spec, save bool) (hosts []types.Host, err error) {
 	return hosts, nil
 }
 
-func configureIaaS(hosts []types.Host, spec types.Spec) (err error) {
+func configureIaaS(hosts []*types.Host, spec types.Spec) (err error) {
 	cp := provider_registry.GetProvider(spec.CloudDriverName, spec.ClusterType)
 	if cp != nil {
 		cp.SetHosts(hosts)
@@ -48,7 +48,7 @@ func configureIaaS(hosts []types.Host, spec types.Spec) (err error) {
 	return nil
 }
 
-func runDeploy(hosts []types.Host, spec types.Spec) (err error) {
+func runDeploy(hosts []*types.Host, spec types.Spec) (err error) {
 	var deployer deploy.Deployer
 	deployer, err = ansible.NewDeployer(spec.Name)
 	if err != nil {

@@ -7,7 +7,7 @@ import (
 )
 
 type Aliyun struct {
-	hosts []types.Host
+	hosts []*types.Host
 }
 
 func New() cloudprovider.CloudInterface {
@@ -17,7 +17,7 @@ func New() cloudprovider.CloudInterface {
 func (this *Aliyun) SetConfigFromFlags(opts drivers.DriverOptions) error {
 	return nil
 }
-func (this *Aliyun) SetHosts(hosts []types.Host) {
+func (this *Aliyun) SetHosts(hosts []*types.Host) {
 
 }
 func (this *Aliyun) Configure() error {

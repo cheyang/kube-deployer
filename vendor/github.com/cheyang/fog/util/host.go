@@ -13,7 +13,7 @@ const (
 	splitHostname = "(.+)-(\\d+)"
 )
 
-func BuildRunningMap(hosts []types.Host) (runningHostMap map[string][]string, err error) {
+func BuildRunningMap(hosts []*types.Host) (runningHostMap map[string][]string, err error) {
 	runningHostMap = make(map[string][]string)
 
 	for _, host := range hosts {

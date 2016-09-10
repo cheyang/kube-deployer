@@ -13,7 +13,7 @@ import (
 var storePath string
 
 // Create hosts in batch
-func CreateInBatch(vmSpecs []types.VMSpec, hostBus chan<- types.Host) (err error) {
+func CreateInBatch(vmSpecs []types.VMSpec, hostBus chan<- *types.Host) (err error) {
 
 	// make working directory
 

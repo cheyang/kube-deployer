@@ -32,7 +32,7 @@ func Scaleout(s persist.Store, spec types.Spec, requiredRoleMap map[string]bool)
 	}
 
 	// pick up the hosts for deployment
-	hosts := make([]types.Host, 0)
+	hosts := make([]*types.Host, 0)
 	for _, host := range runningHosts {
 	role_loop:
 		for _, role := range host.Roles {

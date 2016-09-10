@@ -8,7 +8,7 @@ import (
 	"github.com/cheyang/fog/types"
 )
 
-type byHostName []types.Host
+type byHostName []*types.Host
 
 func (s byHostName) Len() int {
 	return len(s)
