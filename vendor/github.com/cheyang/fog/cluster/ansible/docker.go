@@ -6,7 +6,9 @@ import (
 	"strings"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/docker/pkg/jsonmessage"
 	"github.com/docker/docker/pkg/stdcopy"
+	"github.com/docker/docker/pkg/term"
 	docker_client "github.com/docker/engine-api/client"
 	docker "github.com/docker/engine-api/types"
 	"github.com/docker/engine-api/types/container"
@@ -20,10 +22,20 @@ func (this *ansibleManager) initDockerClient() (err error) {
 
 func (this *ansibleManager) pullImage() error {
 	ctx := context.Background()
-	_, err := dockerClient.ImagePull(ctx,
+	resp, err := dockerClient.ImageCreate(ctx,
 		this.containerCreateConfig.Config.Image,
-		docker.ImagePullOptions{})
-	return err
+		docker.ImageCreateOptions{})
+	if err != nil {
+		return err
+	}
+	defer resp.Close()
+
+	fd, isTerminal := term.GetFdInfo(logrus.StandardLogger().Out)
+	return jsonmessage.DisplayJSONMessagesStream(resp,
+		logrus.StandardLogger().Out,
+		fd,
+		isTerminal,
+		nil)
 }
 
 func (this *ansibleManager) imageExist() bool {
@@ -35,6 +47,7 @@ func (this *ansibleManager) imageExist() bool {
 		logrus.WithError(err).Errorf("failed to inspect image %s",
 			this.containerCreateConfig.Config.Image)
 	}
+
 	return found
 }
 
