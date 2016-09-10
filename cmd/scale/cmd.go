@@ -101,6 +101,7 @@ var (
 					"etcd":    true,
 				}
 
+				fmt.Println(roleMap)
 				return nil
 				// return cluster.Scaleout(storage, newSpec, roleMap)
 				// scale in
