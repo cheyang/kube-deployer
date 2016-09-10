@@ -6,7 +6,7 @@ ClusterType: k8s
 DockerRun: 
   Config: 
     Cmd: 
-      - ./deploy-cluster.sh
+      - ./deploy-node.sh
     Env: 
       - ANSIBLE_HOST_KEY_CHECKING=False
     Image: "cheyang/k8s-ansible:on-build"
