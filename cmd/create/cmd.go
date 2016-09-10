@@ -48,9 +48,9 @@ var (
 					host.SSHKeyPath,
 					host.Roles)
 			}
+			return nil
 		},
 	}
-
 	retry = false
 )
 
