@@ -69,12 +69,15 @@ var (
 				return err
 			}
 			for _, vmSpec := range spec.VMSpecs {
-				if vmSpec.Name == "" {
+				if vmSpec.Name == slaveName {
 					slaveSpec = &vmSpec
 					for k, v := range spec.Properties {
 						if _, found := slaveSpec.Properties[k]; !found {
 							slaveSpec.Properties[k] = v
 						}
+					}
+					if slaveSpec.CloudDriverName == "" {
+						slaveSpec.CloudDriverName = spec.CloudDriverName
 					}
 					break
 				}
@@ -93,6 +96,9 @@ var (
 				defer fog.SaveSpec(&newSpec, deployFile)
 				if err != nil {
 					return err
+				}
+				if slaveSpec == nil {
+					return fmt.Errorf("failed to find vm spec the type %s", slaveName)
 				}
 				slaveSpec.Instances = desiredNum - runningNum
 				newSpec.VMSpecs[0] = *slaveSpec
