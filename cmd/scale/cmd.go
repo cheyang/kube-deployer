@@ -101,7 +101,7 @@ var (
 					return fmt.Errorf("failed to find vm spec the type %s", slaveName)
 				}
 				slaveSpec.Instances = desiredNum - runningNum
-				newSpec.VMSpecs[0] = *slaveSpec
+				newSpec.VMSpecs = []fog.VMSpec{*slaveSpec}
 				roleMap := map[string]bool{
 					"masters": true,
 					"etcd":    true,
