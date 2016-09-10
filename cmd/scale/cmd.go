@@ -90,6 +90,7 @@ var (
 				fmt.Printf("paramFile %s\n", paramFile)
 
 				newSpec, err := fog.LoadSpec(deployFile)
+				defer fog.SaveSpec(&newSpec, deployFile)
 				if err != nil {
 					return err
 				}
@@ -100,7 +101,8 @@ var (
 					"etcd":    true,
 				}
 
-				return cluster.Scaleout(storage, newSpec, roleMap)
+				return nil
+				// return cluster.Scaleout(storage, newSpec, roleMap)
 				// scale in
 			} else if runningNum > desiredNum {
 				gap := runningNum - desiredNum
