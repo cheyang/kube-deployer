@@ -90,7 +90,6 @@ var (
 				fmt.Printf("paramFile %s\n", paramFile)
 
 				newSpec, err := fog.LoadSpec(deployFile)
-				defer storage.SaveSpec(&newSpec)
 				if err != nil {
 					return err
 				}
@@ -180,7 +179,6 @@ func generateConfigFiles(args *types.ScaleArguments) (deployFileName, paramFileN
 	t := time.Now()
 	timestamp := fmt.Sprint(t.Format("20060102150405"))
 	inputDir := filepath.Join(workingDir,
-		"input",
 		"scale_"+timestamp)
 	err = os.MkdirAll(inputDir, 0700)
 	if err != nil {

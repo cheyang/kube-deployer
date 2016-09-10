@@ -36,7 +36,18 @@ var (
 			}
 			fmt.Printf("deployFile %s\n", deployFile)
 			fmt.Printf("paramFile %s\n", paramFile)
-			return runDeploy(deployFile)
+			hosts, err := runDeploy(deployFile)
+			if err != nil {
+				return err
+			}
+
+			for _, host := range hosts {
+				fmt.Printf("Name: %s, Ipaddress %s, SSH key path %s with roles [%v]\n",
+					host.Name,
+					host.SSHHostname,
+					host.SSHKeyPath,
+					host.Roles)
+			}
 		},
 	}
 
