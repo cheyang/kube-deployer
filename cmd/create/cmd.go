@@ -162,7 +162,7 @@ func runDeploy(configFile string) ([]*fog.Host, error) {
 	//read and parse the config file
 	var (
 		spec  = fog.Spec{}
-		hosts = make([]fog.Host, 0)
+		hosts = make([]*fog.Host, 0)
 	)
 
 	if _, err := os.Stat(configFile); os.IsNotExist(err) {
