@@ -106,7 +106,6 @@ var (
 					"masters": true,
 					"etcd":    true,
 				}
-
 				return cluster.Scaleout(storage, newSpec, roleMap)
 				// scale in
 			} else if runningNum > desiredNum {
