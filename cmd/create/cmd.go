@@ -158,20 +158,24 @@ func generateConfigFiles(args *types.DeployArguments) (deployFileName, paramFile
 	return deployFileName, paramFileName, nil
 }
 
-func runDeploy(configFile string) error {
+func runDeploy(configFile string) ([]fog.Host, error) {
 	//read and parse the config file
-	spec := fog.Spec{}
+	var (
+		spec  = fog.Spec{}
+		hosts = make([]fog.Host, 0)
+	)
+
 	if _, err := os.Stat(configFile); os.IsNotExist(err) {
-		return err
+		return hosts, err
 	}
 	data, err := ioutil.ReadFile(configFile)
 	if err != nil {
-		return err
+		return hosts, err
 	}
 	decoder := yaml.NewYAMLToJSONDecoder(bytes.NewReader(data))
 	err = decoder.Decode(&spec)
 	if err != nil {
-		return err
+		return hosts, err
 	}
 
 	retry := viper.GetBool("retry")
