@@ -2,9 +2,11 @@ package types
 
 import (
 	"bytes"
+	"encoding/json"
 	"io/ioutil"
 	"os"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/cheyang/fog/util/yaml"
 	docker "github.com/docker/engine-api/types"
 	"github.com/docker/machine/libmachine/drivers"
@@ -61,4 +63,20 @@ func LoadSpec(configFile string) (spec Spec, err error) {
 	decoder := yaml.NewYAMLToJSONDecoder(bytes.NewReader(data))
 	err = decoder.Decode(&spec)
 	return spec, err
+}
+
+func SaveSpec(spec *Spec, configFile string) error {
+	output, err := json.MarshalIndent(spec, "", "    ")
+	if err != nil {
+		//fmt.Println("Error marshalling to JSON:", err)
+		logrus.WithError(err).Infof("Error marshalling %v to JSON", spec)
+		return err
+	}
+	err = ioutil.WriteFile(configFile, output, 0600)
+	if err != nil {
+		//fmt.Println("Error writing JSON to file:", err)
+		logrus.WithError(err).Infof("Error writing JSON to file: %s", configFile)
+		return err
+	}
+	return nil
 }

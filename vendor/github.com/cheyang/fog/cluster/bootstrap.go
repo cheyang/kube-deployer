@@ -6,11 +6,11 @@ import (
 	"github.com/cheyang/fog/util/dump"
 )
 
-func Bootstrap(spec types.Spec) (err error) {
+func Bootstrap(spec types.Spec) (hosts []types.Host, err error) {
 
 	err = types.Validate(spec)
 	if err != nil {
-		return err
+		return hosts, err
 	}
 
 	logrus.Infof("spec: %+v", spec)
@@ -18,15 +18,15 @@ func Bootstrap(spec types.Spec) (err error) {
 	dump.InstallCoreDumpGenerator()
 
 	// save spec
-	hosts, err := provisionVMs(spec, true)
+	hosts, err = provisionVMs(spec, true)
 	if err != nil {
-		return err
+		return hosts, err
 	}
 
 	err = configureIaaS(hosts, spec)
 	if err != nil {
-		return err
+		return hosts, err
 	}
 
-	return runDeploy(hosts, spec)
+	return hosts, runDeploy(hosts, spec)
 }
