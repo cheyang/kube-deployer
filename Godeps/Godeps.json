@@ -7,6 +7,14 @@
 	],
 	"Deps": [
 		{
+			"ImportPath": "github.com/Azure/go-ansiterm",
+			"Rev": "fa152c58bc15761d0200cb75fe958b89a9d4888e"
+		},
+		{
+			"ImportPath": "github.com/Azure/go-ansiterm/winterm",
+			"Rev": "fa152c58bc15761d0200cb75fe958b89a9d4888e"
+		},
+		{
 			"ImportPath": "github.com/Microsoft/go-winio",
 			"Comment": "v0.3.5-2-gce2922f",
 			"Rev": "ce2922f643c8fd76b46cadc7f404a06282678b34"
@@ -18,55 +26,55 @@
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cloudprovider",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cloudprovider/providers/aliyun/k8s",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cloudprovider/registry",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cluster",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cluster/ansible",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/cluster/deploy",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/host",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/persist",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/types",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/util",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/util/dump",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/util/helpers",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cheyang/fog/util/yaml",
-			"Rev": "aeff1eedfbf0305f08ccc46a4be8576c61173cd9"
+			"Rev": "babb75da875c5bfa924af45f2e756fcea140f36e"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry-incubator/candiedyaml",
@@ -103,14 +111,29 @@
 			"Rev": "b1b100cf011b037b8821e8d0ae4f5ab3e2222c48"
 		},
 		{
+			"ImportPath": "github.com/docker/docker/pkg/jsonlog",
+			"Comment": "docs-v1.12.0-rc4-2016-07-15-1384-gebae43e",
+			"Rev": "ebae43efc2c1a13f0ff9b46ab568ba758e1a9b66"
+		},
+		{
+			"ImportPath": "github.com/docker/docker/pkg/jsonmessage",
+			"Comment": "docs-v1.12.0-rc4-2016-07-15-1384-gebae43e",
+			"Rev": "ebae43efc2c1a13f0ff9b46ab568ba758e1a9b66"
+		},
+		{
 			"ImportPath": "github.com/docker/docker/pkg/stdcopy",
-			"Comment": "v1.5.0",
-			"Rev": "a8a31eff10544860d2188dddabdee4d727545796"
+			"Comment": "docs-v1.12.0-rc4-2016-07-15-1384-gebae43e",
+			"Rev": "ebae43efc2c1a13f0ff9b46ab568ba758e1a9b66"
 		},
 		{
 			"ImportPath": "github.com/docker/docker/pkg/term",
-			"Comment": "v1.5.0",
-			"Rev": "a8a31eff10544860d2188dddabdee4d727545796"
+			"Comment": "docs-v1.12.0-rc4-2016-07-15-1384-gebae43e",
+			"Rev": "ebae43efc2c1a13f0ff9b46ab568ba758e1a9b66"
+		},
+		{
+			"ImportPath": "github.com/docker/docker/pkg/term/windows",
+			"Comment": "docs-v1.12.0-rc4-2016-07-15-1384-gebae43e",
+			"Rev": "ebae43efc2c1a13f0ff9b46ab568ba758e1a9b66"
 		},
 		{
 			"ImportPath": "github.com/docker/engine-api/client",
