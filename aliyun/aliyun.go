@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/cheyang/fog/cloudprovider"
@@ -21,6 +22,8 @@ const (
 var (
 	kubeletPort = 10250
 	flannelPort = 8472
+	client      *ecs.Client
+	once        sync.Once
 )
 
 type aliyunProvider struct {
@@ -81,7 +84,7 @@ func (this *aliyunProvider) configureSecurityGroup(d *aliyunecs.Driver) error {
 	}
 
 	for {
-		groups, pagination, err := d.getClient().DescribeSecurityGroups(&args)
+		groups, pagination, err := getClient(d).DescribeSecurityGroups(&args)
 		if err != nil {
 			return err
 		}
@@ -112,7 +115,7 @@ func (this *aliyunProvider) configureSecurityGroup(d *aliyunecs.Driver) error {
 	perms := this.configureSecurityGroupPermissions(securityGroup)
 	for _, permission := range perms {
 		args := permission.createAuthorizeSecurityGroupArgs(d.Region, d.SecurityGroupId)
-		if err := d.getClient().AuthorizeSecurityGroup(args); err != nil {
+		if err := getClient(d).AuthorizeSecurityGroup(args); err != nil {
 			return err
 		}
 	}
@@ -203,4 +206,15 @@ func (d *aliyunProvider) configureSecurityGroupPermissions(group *ecs.DescribeSe
 	logrus.Debugf("%s | Configuring new permissions: %v", d.MachineName, perms)
 
 	return perms
+}
+
+func getClient(d *aliyunecs.Driver) *ecs.Client {
+	once.Do(func() {
+		client := ecs.NewClient(d.AccessKey, d.SecretKey)
+		if d.APIEndpoint != "" {
+			client.SetEndpoint(d.APIEndpoint)
+		}
+	})
+
+	return client
 }
