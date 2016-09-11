@@ -185,7 +185,7 @@ func (d *aliyunProvider) configureSecurityGroupPermissions(group *ecs.DescribeSe
 
 func getClient(d *aliyunecs.Driver) *ecs.Client {
 	once.Do(func() {
-		client := ecs.NewClient(d.AccessKey, d.SecretKey)
+		client = ecs.NewClient(d.AccessKey, d.SecretKey)
 		if d.APIEndpoint != "" {
 			client.SetEndpoint(d.APIEndpoint)
 		}
