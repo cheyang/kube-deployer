@@ -78,36 +78,15 @@ func (this *aliyunProvider) configureHost(host *fog.Host) (err error) {
 func (this *aliyunProvider) configureSecurityGroup(d *aliyunecs.Driver) error {
 	var securityGroup *ecs.DescribeSecurityGroupAttributeResponse
 
-	args := ecs.DescribeSecurityGroupsArgs{
-		RegionId: d.Region,
-		VpcId:    d.VpcId,
+	args := ecs.DescribeSecurityGroupAttributeArgs{
+		SecurityGroupId: d.SecurityGroupId,
+		RegionId:        d.Region,
 	}
+	securityGroup, err := getClient(d).DescribeSecurityGroupAttribute(&args)
 
-	for {
-		groups, pagination, err := getClient(d).DescribeSecurityGroups(&args)
-		if err != nil {
-			return err
-		}
-
-		for _, grp := range groups {
-			if grp.SecurityGroupId == d.SecurityGroupId && grp.VpcId == d.VpcId {
-				logrus.Debugf("%s | Found existing security group (%s) in %s", d.MachineName, d.SecurityGroupName, d.VpcId)
-				securityGroup, _ = d.getSecurityGroup(grp.SecurityGroupId)
-				break
-			}
-		}
-
-		if securityGroup != nil {
-			break
-		}
-
-		nextPage := pagination.NextPage()
-		if nextPage == nil {
-			break
-		}
-		args.Pagination = *nextPage
+	if err != nil {
+		return err
 	}
-
 	if securityGroup == nil {
 		return fmt.Errorf("Failed to configure the security group %s", d.SecurityGroupId)
 	}
