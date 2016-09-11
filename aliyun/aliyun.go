@@ -6,7 +6,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/cheyang/fog/cloudprovider"
 	"github.com/cheyang/fog/persist"
 	fog "github.com/cheyang/fog/types"
@@ -128,7 +127,6 @@ func (d *aliyunProvider) configureSecurityGroupPermissions(group *ecs.DescribeSe
 	for _, p := range group.Permissions.Permission {
 		portRange := strings.Split(p.PortRange, "/")
 
-		logrus.Debugf("%s | portRange %v", d.MachineName, portRange)
 		fromPort, _ := strconv.Atoi(portRange[0])
 		switch fromPort {
 		case -1:
@@ -181,8 +179,6 @@ func (d *aliyunProvider) configureSecurityGroupPermissions(group *ecs.DescribeSe
 			IpRange:    ipRange,
 		})
 	}
-
-	logrus.Debugf("%s | Configuring new permissions: %v", d.MachineName, perms)
 
 	return perms
 }
