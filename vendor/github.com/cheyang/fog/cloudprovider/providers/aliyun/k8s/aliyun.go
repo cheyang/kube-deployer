@@ -2,6 +2,7 @@ package k8s
 
 import (
 	"github.com/cheyang/fog/cloudprovider"
+	"github.com/cheyang/fog/persist"
 	"github.com/cheyang/fog/types"
 	"github.com/docker/machine/libmachine/drivers"
 )
@@ -10,7 +11,7 @@ type Aliyun struct {
 	hosts []*types.Host
 }
 
-func New() cloudprovider.CloudInterface {
+func New(storePath persist.Store) cloudprovider.CloudInterface {
 	return &Aliyun{}
 }
 

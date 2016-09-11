@@ -6,6 +6,7 @@ import (
 	"github.com/cheyang/fog/cluster/deploy"
 	host_utils "github.com/cheyang/fog/host"
 	"github.com/cheyang/fog/types"
+	"github.com/cheyang/fog/util"
 )
 
 func provisionVMs(spec types.Spec, save bool) (hosts []*types.Host, err error) {
@@ -37,7 +38,11 @@ func provisionVMs(spec types.Spec, save bool) (hosts []*types.Host, err error) {
 }
 
 func configureIaaS(hosts []*types.Host, spec types.Spec) (err error) {
-	cp := provider_registry.GetProvider(spec.CloudDriverName, spec.ClusterType)
+	storage, err := util.GetStorage(spec.Name)
+	if err != nil {
+		return err
+	}
+	cp := provider_registry.GetProvider(spec.CloudDriverName, spec.ClusterType, storage)
 	if cp != nil {
 		cp.SetHosts(hosts)
 		err = cp.Configure() // configure IaaS
