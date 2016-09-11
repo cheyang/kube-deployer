@@ -5,9 +5,7 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/cheyang/fog/cloudprovider/registry"
 	"github.com/cheyang/fog/util"
-	"github.com/cheyang/kube-deployer/aliyun"
 	"github.com/cheyang/kube-deployer/cmd/create"
 	"github.com/cheyang/kube-deployer/cmd/remove"
 	"github.com/cheyang/kube-deployer/cmd/scale"
@@ -82,13 +80,13 @@ var mainCmd = &cobra.Command{
 
 		util.SetStoreRoot(helper.Root)
 
-		err = registry.RegisterProvider("aliyun",
-			"k8s",
-			aliyun.New)
-		if err != nil {
-			fmt.Printf("Error: %v\n", err)
-			os.Exit(1)
-		}
+		// err = registry.RegisterProvider("aliyun",
+		// 	"k8s",
+		// 	aliyun.New)
+		// if err != nil {
+		// 	fmt.Printf("Error: %v\n", err)
+		// 	os.Exit(1)
+		// }
 	},
 }
 
