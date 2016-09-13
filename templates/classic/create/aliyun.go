@@ -9,7 +9,7 @@ DockerRun:
       - ./deploy-cluster.sh
     Env: 
       - ANSIBLE_HOST_KEY_CHECKING=False
-    Image: "cheyang/k8s-ansible:on-build"
+    Image: "cheyang/k8s-ansible:latest"
     Tty: true
   HostConfig: 
     Binds: 
